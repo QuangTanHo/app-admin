@@ -46,7 +46,7 @@ FROM nginx:alpine
 
 # Sao chép các tệp tĩnh từ giai đoạn xây dựng vào thư mục default của nginx
 # COPY --from=build-stage /app/dist/ /root/nong-san/app-admin/dist/app-admin
-COPY --from=build-stage /app/dist/ /usr/share/nginx/html
+COPY --from=build-stage /app/dist/app-admin /usr/share/nginx/html
 
 # Thiết lập cấu hình tùy chỉnh cho nginx
 # COPY nginx.conf /etc/nginx/nginx.conf
