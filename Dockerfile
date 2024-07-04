@@ -45,9 +45,11 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Sao chép các tệp tĩnh từ giai đoạn xây dựng vào thư mục default của nginx
-COPY --from=build-stage /app/dist/ /root/nong-san/app-admin/dist/app-admin
+# COPY --from=build-stage /app/dist/ /root/nong-san/app-admin/dist/app-admin
+COPY --from=build-stage /app/dist/ /usr/share/nginx/html
 
 # Thiết lập cấu hình tùy chỉnh cho nginx
+# COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Mở cổng 80 để truy cập vào ứng dụng
