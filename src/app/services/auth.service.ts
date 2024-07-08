@@ -7,6 +7,7 @@ import { UserModel } from '../models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
+  private readonly TOKEN_KEY = 'access_token';
   token: string = "";
   user: UserModel = new UserModel();
 
@@ -15,7 +16,7 @@ export class AuthService {
   ) { }
 
   isAuthenticated(){
-    this.token = localStorage.getItem("token") ?? "";
+    this.token = localStorage.getItem(this.TOKEN_KEY) ?? "";
     if(this.token === ""){
       this.router.navigateByUrl("/login");
       return false;
@@ -30,10 +31,10 @@ export class AuthService {
       return false;
     }
 
-    this.user.id = decode["Id"];
-    this.user.name = decode["Name"];
+    this.user.userId = decode["Id"];
+    this.user.lastName = decode["Name"];
     this.user.email = decode["Email"];
-    this.user.userName = decode["UserName"];
+    // this.user.userName = decode["UserName"];
 
     console.log(this.user);
     

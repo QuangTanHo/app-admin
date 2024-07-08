@@ -1,6 +1,14 @@
 export class UserModel{
-    id: string = "";
-    name: string = "";
-    userName: string = "";
-    email: string = "";
+    userId: string ='';
+    firstName: string ='';
+    lastName: string ='';
+    email: string ='';
+    phoneNumber: string ='';
+    address: string ='';
+    city: string ='';
+    state: string ='';
+    zipCode: string ='';
+    roleId: string ='';
+    createDate: string ='';
+    modifyDate: string ='';
 }

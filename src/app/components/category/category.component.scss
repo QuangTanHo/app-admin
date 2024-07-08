@@ -1,0 +1,10 @@
+
+.container{
+    .group-btn{
+        display: flex;
+        gap:10px;
+    }
+}
+.center-dialog .mat-dialog-container {
+    transform: translate(30%, -900%);
+  }

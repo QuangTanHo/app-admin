@@ -1,5 +1,6 @@
 export class ResultModel<T>{
-    data?: T;
-    errorMessages?: string[];
-    isSuccessful: boolean = false;
+    result_data?: T;
+    result_msg?: string[];
+    // isSuccessful: boolean = false;
+    result_code?:string;
 }

@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
 a{
     cursor: pointer;
 }
@@ -8,4 +10,363 @@ a{
 
 .me-2{
     margin-right: 7px;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;}
+
+.switch {
+    margin-right: .75rem;
+    position: relative;
+    vertical-align: middle;
+    margin-bottom: 0;
+    display: inline-block;
+    border-radius: 30rem;
+    cursor: pointer;
+    min-height: 1.35rem;
+    font-size: .9375rem;
+    line-height: 1.4
+}
+
+.switch .switch-label:first-child {
+    padding-right: .5rem
+}
+
+.switch .switch-input~.switch-label {
+    padding-left: 3rem
+}
+
+.switch .switch-toggle-slider {
+    width: 2.5rem;
+    height: 1.35rem;
+    font-size: .625rem;
+    line-height: 1.35rem;
+    border: 1px solid rgba(0,0,0,0);
+    top: 0
+}
+
+.switch .switch-toggle-slider i {
+    position: relative;
+    font-size: .9375rem;
+    top: -1.35px
+}
+
+.switch .switch-label {
+    top: .01875rem
+}
+
+.switch .switch-input:checked~.switch-toggle-slider::after {
+    left: 1.15rem
+}
+
+.switch .switch-toggle-slider::after {
+    top: -1px;
+    margin: .225rem 0 0 .225rem;
+    width: 14px;
+    height: 14px
+}
+
+.switch .switch-on {
+    padding-left: .225rem;
+    padding-right: 1.125rem
+}
+
+.switch .switch-off {
+    padding-left: 1.125rem;
+    padding-right: .225rem
+}
+
+[dir=rtl] .switch .switch-label {
+    padding-right: 3rem;
+    padding-left: 0
+}
+
+[dir=rtl] .switch .switch-input:checked~.switch-toggle-slider::after {
+    left: auto;
+    right: 1.15rem
+}
+
+[dir=rtl] .switch .switch-toggle-slider::after {
+    margin-left: 0;
+    margin-right: .225rem
+}
+
+[dir=rtl] .switch .switch-on {
+    padding-left: 1.125rem;
+    padding-right: .225rem
+}
+
+[dir=rtl] .switch .switch-off {
+    padding-left: .225rem;
+    padding-right: 1.125rem
+}
+
+[dir=rtl] .switch {
+    margin-left: .75rem;
+    margin-right: 0
+}
+
+.switch-input {
+    opacity: 0;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    z-index: -1
+}
+
+.switch-toggle-slider {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 30rem;
+    background: rgba(0,0,0,0);
+    border: 1px solid rgba(67,89,113,.4) !important;
+    color: rgba(67,89,113,.4);
+    transition-duration: .2s;
+    transition-property: left,right,background,box-shadow;
+    cursor: pointer;
+    user-select: none
+}
+
+.switch-toggle-slider i {
+    top: -2.3px !important
+}
+
+.switch-label {
+    display: inline-block;
+    font-weight: 400;
+    color: #697a8d;
+    position: relative;
+    cursor: default
+}
+
+.switch-off,.switch-on {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    transition-duration: .2s;
+    transition-property: left,right
+}
+
+.switch-on {
+    left: -100%
+}
+
+[dir=rtl] .switch-on {
+    left: auto;
+    right: -100%
+}
+
+.switch-input:not(:checked)~.switch-toggle-slider .switch-on {
+    color: rgba(0,0,0,0)
+}
+
+.switch-off {
+    left: 0
+}
+
+[dir=rtl] .switch-off {
+    right: 0;
+    left: auto
+}
+
+.switch-input:checked~.switch-toggle-slider:after {
+    background: #fff
+}
+
+.switch-input:checked~.switch-toggle-slider .switch-on {
+    left: 0
+}
+
+[dir=rtl] .switch-input:checked~.switch-toggle-slider .switch-on {
+    right: 0;
+    left: auto
+}
+
+.switch-input:checked~.switch-toggle-slider .switch-off {
+    left: 100%;
+    color: rgba(0,0,0,0)
+}
+
+[dir=rtl] .switch-input:checked~.switch-toggle-slider .switch-off {
+    right: 100%;
+    left: auto
+}
+
+.switch-toggle-slider::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    display: block;
+    border-radius: 999px;
+    background: rgba(67,89,113,.6);
+    box-shadow: 0 0 0 1px rgba(67,89,113,.04),0 1px 6px rgba(67,89,113,.09);
+    transition-duration: .2s;
+    transition-property: left,right,background
+}
+
+[dir=rtl] .switch-toggle-slider::after {
+    right: 0;
+    left: auto
+}
+
+.switches-stacked::after {
+    display: block;
+    clear: both;
+    content: ""
+}
+
+.switches-stacked .switch {
+    display: block
+}
+
+
+
+.switch-input:focus~.switch-toggle-slider {
+    border: 1px solid #696cff;
+    box-shadow: 0 0 .25rem .05rem rgba(105,108,255,.1)
+}
+
+.switch-primary.switch .switch-input:checked~.switch-toggle-slider {
+    background: #696cff;
+    border-color: #696cff !important;
+    color: #fff
+}
+
+.switch-primary.switch .switch-input:active~.switch-toggle-slider {
+    box-shadow: none
+}
+
+.switch-primary.switch .switch-input:focus~.switch-toggle-slider {
+    border: 1px solid #696cff;
+    box-shadow: 0 0 .25rem .05rem rgba(105,108,255,.1)
+}
+
+
+ /* pagination */
+
+.page-item.active .page-link,.page-item.active .page-link:hover,.page-item.active .page-link:focus,.pagination li.active>a:not(.page-link),.pagination li.active>a:not(.page-link):hover,.pagination li.active>a:not(.page-link):focus {
+  border-color: #696cff;
+  background-color: #696cff;
+  color: #fff;
+  box-shadow: 0 .125rem .25rem rgba(105,108,255,.4)
+}
+.pagination-secondary .page-item.active .page-link,.pagination-secondary .page-item.active .page-link:hover,.pagination-secondary .page-item.active .page-link:focus,.pagination-secondary.pagination li.active>a:not(.page-link),.pagination-secondary.pagination li.active>a:not(.page-link):hover,.pagination-secondary.pagination li.active>a:not(.page-link):focus {
+  border-color: #8592a3;
+  background-color: #8592a3;
+  color: #fff;
+  box-shadow: 0 .125rem .25rem rgba(133,146,163,.4)
+}
+
+.pagination-success .page-item.active .page-link,.pagination-success .page-item.active .page-link:hover,.pagination-success .page-item.active .page-link:focus,.pagination-success.pagination li.active>a:not(.page-link),.pagination-success.pagination li.active>a:not(.page-link):hover,.pagination-success.pagination li.active>a:not(.page-link):focus {
+  border-color: #71dd37;
+  background-color: #71dd37;
+  color: #fff;
+  box-shadow: 0 .125rem .25rem rgba(113,221,55,.4)
+}
+
+.pagination-info .page-item.active .page-link,.pagination-info .page-item.active .page-link:hover,.pagination-info .page-item.active .page-link:focus,.pagination-info.pagination li.active>a:not(.page-link),.pagination-info.pagination li.active>a:not(.page-link):hover,.pagination-info.pagination li.active>a:not(.page-link):focus {
+  border-color: #03c3ec;
+  background-color: #03c3ec;
+  color: #fff;
+  box-shadow: 0 .125rem .25rem rgba(3,195,236,.4)
+}
+
+.pagination-warning .page-item.active .page-link,.pagination-warning .page-item.active .page-link:hover,.pagination-warning .page-item.active .page-link:focus,.pagination-warning.pagination li.active>a:not(.page-link),.pagination-warning.pagination li.active>a:not(.page-link):hover,.pagination-warning.pagination li.active>a:not(.page-link):focus {
+  border-color: #ffab00;
+  background-color: #ffab00;
+  color: #fff;
+  box-shadow: 0 .125rem .25rem rgba(255,171,0,.4)
+}
+
+.pagination-danger .page-item.active .page-link,.pagination-danger .page-item.active .page-link:hover,.pagination-danger .page-item.active .page-link:focus,.pagination-danger.pagination li.active>a:not(.page-link),.pagination-danger.pagination li.active>a:not(.page-link):hover,.pagination-danger.pagination li.active>a:not(.page-link):focus {
+  border-color: #ff3e1d;
+  background-color: #ff3e1d;
+  color: #fff;
+  box-shadow: 0 .125rem .25rem rgba(255,62,29,.4)
+}
+
+.pagination-dark .page-item.active .page-link,.pagination-dark .page-item.active .page-link:hover,.pagination-dark .page-item.active .page-link:focus,.pagination-dark.pagination li.active>a:not(.page-link),.pagination-dark.pagination li.active>a:not(.page-link):hover,.pagination-dark.pagination li.active>a:not(.page-link):focus {
+  border-color: #233446;
+  background-color: #233446;
+  color: #fff;
+  box-shadow: 0 .125rem .25rem rgba(35,52,70,.4)
+}
+
+.pagination-gray .page-item.active .page-link,.pagination-gray .page-item.active .page-link:hover,.pagination-gray .page-item.active .page-link:focus,.pagination-gray.pagination li.active>a:not(.page-link),.pagination-gray.pagination li.active>a:not(.page-link):hover,.pagination-gray.pagination li.active>a:not(.page-link):focus {
+  border-color: rgba(67,89,113,.1);
+  background-color: rgba(67,89,113,.1);
+  color: #fff;
+  box-shadow: 0 .125rem .25rem rgba(236,238,241,.4)
+}
+
+.page-item.first .page-link,.page-item.last .page-link,.page-item.next .page-link,.page-item.prev .page-link,.page-item.previous .page-link {
+  padding-top: .5rem;
+  padding-bottom: .5rem
+}
+
+.page-item.disabled .page-link {
+  border-color: #d9dee3
+}
+
+.page-item.active .page-link {
+  margin: 0 .1rem 0 .3rem
+}
+
+.page-link,.page-link>a {
+  border-radius: .375rem;
+  line-height: 1;
+  text-align: center;
+  min-width: calc(2.1875rem + calc(0px * 2))
+}
+
+.page-link:focus,.page-link>a:focus {
+  color: #697a8d
+}
+
+.page-link.btn-primary {
+  box-shadow: none !important
+}
+
+.pagination.pagination-square .page-item a {
+  border-radius: 0
+}
+
+.pagination.pagination-round .page-item a {
+  border-radius: 50%
+}
+
+.pagination-lg .page-link,.pagination-lg>li>a:not(.page-link) {
+  min-width: calc(2.875rem + calc(0px * 2))
+}
+
+.pagination-lg>.page-item.first .page-link,.pagination-lg>.page-item.last .page-link,.pagination-lg>.page-item.next .page-link,.pagination-lg>.page-item.prev .page-link,.pagination-lg>.page-item.previous .page-link {
+  padding-top: .853rem;
+  padding-bottom: .853rem
+}
+
+.pagination-sm .page-link,.pagination-sm>li>a:not(.page-link) {
+  min-width: calc(1.5rem + calc(0px * 2))
+}
+
+.pagination-sm .page-link .tf-icon,.pagination-sm>li>a:not(.page-link) .tf-icon {
+  font-size: .9375rem
+}
+
+.pagination-sm>.page-item.first .page-link,.pagination-sm>.page-item.last .page-link,.pagination-sm>.page-item.next .page-link,.pagination-sm>.page-item.prev .page-link,.pagination-sm>.page-item.previous .page-link {
+  padding-top: .3rem;
+  padding-bottom: .3rem
+}
+
+[dir=rtl] .pagination {
+  padding-right: 0
+}
+
+[dir=rtl] .page-item+.page-item .page-link,[dir=rtl] .pagination li+li>a:not(.page-link) {
+  margin-left: 0;
+  margin-right: .1875rem
+}
+
+[dir=rtl] .page-item.first .page-link i,[dir=rtl] .page-item.last .page-link i,[dir=rtl] .page-item.next .page-link i,[dir=rtl] .page-item.prev .page-link i,[dir=rtl] .page-item.previous .page-link i {
+  transform: rotate(180deg)
 }

@@ -8,6 +8,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   imports: [RouterOutlet, NgxSpinnerModule],
   template: `
   <router-outlet></router-outlet>
-  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-multiple" [fullScreen] = "true"><p style="color: white" > Yükleniyor... </p></ngx-spinner>`
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-multiple" [fullScreen] = "true"><p style="color: white" >  </p></ngx-spinner>`
 })
 export class AppComponent {}

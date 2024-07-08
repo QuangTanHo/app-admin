@@ -1,0 +1,64 @@
+// .card {
+//     width: 100%;
+//     margin: 20px;
+//     padding: 20px;
+//     border: 1px solid #ccc;
+//     border-radius: 8px;
+//     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+//   }
+  
+//   .card-title {
+//     font-size: 1.25rem;
+//     font-weight: bold;
+//   }
+  
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Khoảng cách giữa các ảnh */
+  }
+  
+  .image-preview {
+    width: calc(25% - 10px); /* Độ rộng của mỗi ảnh (25% cho 4 cột) và trừ đi khoảng cách */
+    margin-bottom: 10px; /* Khoảng cách dưới mỗi ảnh */
+    position: relative;
+  }
+  .image-preview-set-product{
+    
+  }
+  .image-preview img {
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .file-name {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+  }
+  
+  .btn-remove {
+    margin-left: 8px;
+  }
+  
+.form-select{
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #d9dee3;
+    outline: none;
+}

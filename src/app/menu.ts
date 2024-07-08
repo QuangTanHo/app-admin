@@ -30,14 +30,14 @@ export const Menus: MenuModel[] = [
             {
                 name: "Add Product",
                 icon: "fas fa-plus",
-                url: "/",
+                url: "/add-product",
                 isTitle: false,
                 subMenus: []
             },
             {
                 name: "Category List",
                 icon: "fa fa-list-alt",
-                url: "/",
+                url: "/category",
                 isTitle: false,
                 subMenus: []
             },
