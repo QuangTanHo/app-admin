@@ -33,7 +33,7 @@ export class UserService {
         return this.http.get<UserModel>(`${this.apiUser}${userId}`);
       }
 
-      saveUserResponseToLocalStorage(userResponse?: UserModel) {
+ saveUserResponseToLocalStorage(userResponse?: UserModel) {
         try {
             if (userResponse == null || !userResponse) {
                 return;

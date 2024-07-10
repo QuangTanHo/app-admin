@@ -1,32 +1,3 @@
-<!-- <app-blank pageName="Product" [routes]="['product-list']">
-  <app-section sectionTitle="Product List">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card" (click)="fileInput.click()">
-          <div class="card-body">
-            <div class="row">
-            <h5 class="card-title">Upload Images</h5>
-            <input #fileInput type="file" multiple style="display: none" (change)="onFileSelected($event)" />
-            <div *ngIf="imageSrcs.length > 0" class="preview">
-              <div *ngFor="let image of imageSrcs; let i = index" class="image-preview">
-                <img [src]="image.src" alt="Uploaded Image" class="img-fluid">
-                <div class="overlay">
-                  <span class="file-name">{{ image.name }}</span>
-                  <button class="btn btn-sm btn-danger" (click)="removeImage(i)">Remove</button>
-                </div>
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6"></div>
-    </div>
-   
-    
-</app-section>
-</app-blank> -->
-
 <app-blank pageName="Product" [routes]="['product-list']">
   <app-section sectionTitle="Product List">
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -48,7 +19,7 @@
           </div>
           <div class="d-flex align-content-center flex-wrap gap-3">
             <button class="btn btn-label-secondary">Discard</button>
-            <button class="btn btn-label-primary">Save draft</button>
+            <button class="btn btn-label-primary" (click)="openDialog()">Save draft</button>
             <button type="submit" (click)="insertProduct()" class="btn btn-primary">Publish product</button>
           </div>
 
@@ -66,47 +37,46 @@
               <div class="card-body">
                 <div class="mb-3">
                   <label class="form-label" for="ecommerce-product-name">Name</label>
-                  <input type="text" class="form-control" id="ecommerce-product-name"  [(ngModel)]="productDTo.product_name" placeholder="Product title"
-                    name="productTitle" aria-label="Product title">
+                  <input type="text" class="form-control" id="ecommerce-product-name"
+                    [(ngModel)]="productDTo.product_name" placeholder="Product title" name="productTitle"
+                    aria-label="Product title">
                 </div>
                 <div class="row mb-3">
                   <div class="col"><label class="form-label" for="ecommerce-product-sku">SKU</label>
-                    <input type="number"  [(ngModel)]="productDTo.product_code"  class="form-control" id="ecommerce-product-sku" placeholder="SKU"
-                      name="productSku" aria-label="Product SKU">
+                    <input type="number" [(ngModel)]="productDTo.product_code" class="form-control"
+                      id="ecommerce-product-sku" placeholder="SKU" name="productSku" aria-label="Product SKU">
                   </div>
                   <div class="col"><label class="form-label" for="ecommerce-product-barcode">Barcode</label>
-                    <input type="text"   [(ngModel)]="productDTo.bar_code" class="form-control" id="ecommerce-product-barcode" placeholder="0123-4567"
-                      name="productBarcode" aria-label="Product barcode">
+                    <input type="text" [(ngModel)]="productDTo.bar_code" class="form-control"
+                      id="ecommerce-product-barcode" placeholder="0123-4567" name="productBarcode"
+                      aria-label="Product barcode">
                   </div>
                 </div>
                 <!-- Description -->
                 <div>
                   <label class="form-label">Description <span class="text-muted">(Optional)</span></label>
-                  <textarea   [(ngModel)]="productDTo.description_long" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <textarea [(ngModel)]="productDTo.description_long" class="form-control"
+                    id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
               </div>
             </div>
-            <!-- /Product Information -->
-            <!-- Media -->
-            <div class="card mb-4" (click)="fileInput.click()">
+            <div class="card mb-4" (click)="fileInputSetListProduct.click()">
               <div class="card-body">
-                <div class="row">
-                <h5 class="card-title"> Set Images Product</h5>
-                <input #fileInput type="file" multiple style="display: none" (change)="onFileSelected($event)" />
-                <div *ngIf="imageSrcs.length > 0" class="preview">
-                  <div *ngFor="let image of imageSrcs; let i = index" class="image-preview">
-                    <img [src]="image.src" alt="Uploaded Image" class="img-fluid">
-                    <div class="overlay">
-                      <span class="file-name">{{ image.name }}</span>
-                      <button class="btn btn-sm btn-danger" (click)="removeImage(i)">Remove</button>
+                <div class="drag-drop-zone" (dragover)="onDragOverListproduct($event)" (dragleave)="onDragLeaveListproduct($event)"
+                  (drop)="onDropListProduct($event)" (click)="onAreaClickListproduct()">
+                  <p *ngIf="images.length === 0">Drag and drop images here, or click to select</p>
+                  <div *ngFor="let image of images; let i = index" class="image-item">
+                    <img [src]="image.src" [alt]="image.name" />
+                    <div class="file-info">
+                      <span>{{ image.name }}</span>
+                      <button (click)="onDeleteClickListProduct($event, i)">Delete</button>
                     </div>
                   </div>
-                </div>
+                  <input type="file" (change)="onFileSelectedListProduct($event)" hidden #fileInputSetListProduct multiple />
                 </div>
               </div>
             </div>
             <!-- /Media -->
-            <!-- Variants -->
             <div class="card mb-4" data-select2-id="21">
               <div class="card-header">
                 <h5 class="card-title mb-0">Variants</h5>
@@ -127,17 +97,8 @@
                               <option value="color" data-select2-id="26">Color</option>
                               <option value="weight" data-select2-id="27">Weight</option>
                               <option value="smell" data-select2-id="28">Smell</option>
-                            </select><span
-                              class="select2 select2-container select2-container--default select2-container--below"
-                              dir="ltr" data-select2-id="1" style="width: 272.203px;"><span class="selection"><span
-                                  class="select2-selection select2-selection--single" role="combobox"
-                                  aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false"
-                                  aria-labelledby="select2-form-repeater-1-1-container"><span
-                                    class="select2-selection__rendered" id="select2-form-repeater-1-1-container"
-                                    role="textbox" aria-readonly="true" title="Smell">Smell</span><span
-                                    class="select2-selection__arrow" role="presentation"><b
-                                      role="presentation"></b></span></span></span><span class="dropdown-wrapper"
-                                aria-hidden="true"></span></span></div>
+                            </select>
+                          </div>
                         </div>
 
                         <div class="mb-3 col-8">
@@ -164,24 +125,23 @@
           <div class="col-12 col-lg-4" data-select2-id="40">
             <!-- Pricing Card -->
             <div class="card mb-4">
-              <div class="card-body">
-                <div class="row">
-                <h5 class="card-title"> Set Image Product</h5>
-                <div class="input-group mb-3">
-                  <input type="file" (change)="onFileSelectedSetProduct($event)"  id="fileInputProduct" class="d-none" />
-                  <input type="text" class="form-control" [value]="fileName" readonly placeholder="No file chosen" />
-                  <div class="input-group-append">
-                    <button type="button" class="btn btn-primary" (click)="onFileInputClickSetProduct()">Chọn ảnh</button>
+              <div class="card-header">
+                Set product Image
+              </div>
+              <div class="drag-drop-zone" (dragover)="onDragOverSetProduct($event)" (dragleave)="onDragLeaveSetProduct($event)"
+                (drop)="onDrop($event)" (click)="onAreaClickSetProduct()">
+                <p *ngIf="!imageSrcSetProduct">Drag and drop an image here, or click to select one</p>
+                <img *ngIf="imageSrcSetProduct" [src]="imageSrcSetProduct" alt="Uploaded Image" />
+                <input type="file" (change)="onFileSelectedSetProduct($event)" hidden #fileInputSetProduct />
+                <div *ngIf="imageSrcSetProduct" class="preview-set-product">
+                  <div class="overlay">
+                    <span class="file-name">"fff"</span>
+                    <button class="btn btn-sm btn-danger" (click)="onDeleteClickSetProduct($event)">Remove</button>
                   </div>
-                </div>
-                <div *ngIf="imageSrcSetProduct" class="image-preview-set-product mt-3">
-                  <img [src]="imageSrcSetProduct" alt="Selected Image" class="img-thumbnail" />
-                </div>
                 </div>
               </div>
             </div>
             <!-- /Pricing Card -->
-            <!-- Pricing Card -->
             <div class="card mb-4">
               <div class="card-header">
                 <h5 class="card-title mb-0">Pricing</h5>
@@ -190,14 +150,15 @@
                 <!-- Base Price -->
                 <div class="mb-3">
                   <label class="form-label" for="ecommerce-product-price">Base Price</label>
-                  <input type="number"  [(ngModel)]="productDTo.price" class="form-control" id="ecommerce-product-price" placeholder="Price"
-                    name="productPrice" aria-label="Product price">
+                  <input type="number" [(ngModel)]="productDTo.price" class="form-control" id="ecommerce-product-price"
+                    placeholder="Price" name="productPrice" aria-label="Product price">
                 </div>
                 <!-- Discounted Price -->
                 <div class="mb-3">
                   <label class="form-label" for="ecommerce-product-discount-price">Discounted Price</label>
-                  <input type="number"  [(ngModel)]="productDTo.promotional_price" class="form-control" id="ecommerce-product-discount-price"
-                    placeholder="Discounted Price" name="productDiscountedPrice" aria-label="Product discounted price">
+                  <input type="number" [(ngModel)]="productDTo.promotional_price" class="form-control"
+                    id="ecommerce-product-discount-price" placeholder="Discounted Price" name="productDiscountedPrice"
+                    aria-label="Product discounted price">
                 </div>
                 <!-- Charge tax check box -->
                 <div class="form-check mb-2">
@@ -235,7 +196,8 @@
                     <span>Category</span>
                   </label>
                   <div class="position-relative" data-select2-id="46">
-                    <select class="form-select" aria-label="Default select example"(ngModelChange)="changeCategory($event)" [(ngModel)]="categorySelect">
+                    <select class="form-select" aria-label="Default select example"
+                      (ngModelChange)="changeCategory($event)" [(ngModel)]="categorySelect">
                       <option selected>Select Category</option>
                       <option *ngFor="let c of categories" [ngValue]="c.category_id">{{ c.category_name }}</option>
                     </select>
@@ -243,6 +205,7 @@
                 </div>
               </div>
             </div>
+
             <!-- /Organize Card -->
           </div>
           <!-- /Second column -->

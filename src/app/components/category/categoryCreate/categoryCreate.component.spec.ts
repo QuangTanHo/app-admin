@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CategoryCreateOrUpdateComponent } from './categoryCreateOrUpdate.component';
+import { CategoryCreateComponent } from './categoryCreate.component';
 
 describe('CategoryCreateOrUpdateComponent', () => {
-  let component: CategoryCreateOrUpdateComponent;
-  let fixture: ComponentFixture<CategoryCreateOrUpdateComponent>;
+  let component: CategoryCreateComponent;
+  let fixture: ComponentFixture<CategoryCreateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryCreateOrUpdateComponent ]
+      declarations: [ CategoryCreateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategoryCreateOrUpdateComponent);
+    fixture = TestBed.createComponent(CategoryCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

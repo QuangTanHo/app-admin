@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Category } from '../models/category';
@@ -14,7 +14,8 @@ export class CategoryService {
   private apiBaseUrl = environment.apiBaseUrl;
   private apiConfig = {
     headers: this.httpUtilService.createHeaders(),
-}
+  }
+  private token = localStorage.getItem('access_token') ?? '';;
 
   constructor(private http: HttpClient,
     private httpUtilService: HttpUtilService
@@ -26,13 +27,18 @@ export class CategoryService {
     return this.http.post<Category>(`${this.apiBaseUrl}un_auth/category/category_detail`,category);
   }
   deleteCategory(category_id: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiBaseUrl}admin/category/delete/${category_id}`);
+    return this.http.delete<string>(`${this.apiBaseUrl}admin/category/delete/${category_id}`,{
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.token}`
+      })
+    })
   }
-  // updateCategory(id: number, updatedCategory: UpdateCategoryDTO): Observable<UpdateCategoryDTO> {
-  //   return this.http.put<Category>(`${this.apiBaseUrl}/categories/${id}`, updatedCategory);
-  // }
   insertCategory(category: Category): Observable<any> {
-    // Add a new category
     return this.http.post(`${this.apiBaseUrl}un_auth/category/category_create`, category,this.apiConfig);
+  }
+  
+  updateCategory(category: Category): Observable<any> {
+    return this.http.post<Category>(`${this.apiBaseUrl}un_auth/category/category_update`, category);
   }
 }

@@ -7,6 +7,9 @@ import { TypeModel } from '../../../models/type.model';
 import { CategoryResponse } from '../../../reponse/categoryResponse';
 import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../models/product';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { ProductListComponent } from '../product-list.component';
+import { ShowProductComponent } from '../show-product/show-product.component';
 interface ImageInfo {
   src: string;
   name: string;
@@ -14,13 +17,17 @@ interface ImageInfo {
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule,DialogModule],
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })
 
 export class AddProductComponent implements OnInit {
   imageSrcs: ImageInfo[] = [];
+  imageSrc: string | ArrayBuffer | null = null;
+  @ViewChild('fileInputSetProduct') fileInputSetProduct!: ElementRef;
+  @ViewChild('fileInputSetListProduct') fileInputSetListProduct!: ElementRef;
+  images: { src: string | ArrayBuffer | null, name: string }[] = [];
 
   imageSrcSetProduct: string | ArrayBuffer | null = null;
   // file: File | null = null; // Declare file as a global variable
@@ -63,62 +70,93 @@ typeModel? :TypeModel;
 categories: CategoryResponse[] = [];
 
   constructor(
-    private uploadService : UploadService,
+    private uploadService: UploadService,
     private categoryService: CategoryService,
-     private productService : ProductService) { }
+    private productService: ProductService,
+    public dialog: Dialog) { }
 
   ngOnInit() {
     this.getCategories()
   }
 
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-  
-    if (input.files && input.files.length > 0) {
-      for (let i = 0; i < input.files.length; i++) {
-        const file = input.files[i] as File; // Type assertion to File
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          const imageInfo: ImageInfo = {
-            src: e.target.result,
-            name: file.name // Access 'name' property of 'File'
-          };
-        this.uploadFileImages.file_name =this.fileName;
-        this.uploadFileImages.file=file;
-        this.uploadFileImages.type ='PRODUCT_IMAGE';
-        this.uploadFile.type='PRODUCT_IMAGE';
-          this.uploadService.uploadImages(this.uploadFileImages).subscribe({
-            next: (response :any) => {
-              if(response.result_data.file_id){
-                this.listImage.push(response.result_data.file_id.toString());
-              }
-            },
-            error: (error) => {
-              // Handle error while inserting the product
-              alert(error.error)
-              console.error('Error inserting product:', error);
-            }
-          });  
-          this.imageSrcs.push(imageInfo);
-        };
-        reader.readAsDataURL(file);
-      }
+getCategories() {
+  this.typeModel = {
+    type: ["PRODUCT_CATEGORY"]
+  };
+  this.categoryService.getCategories(this.typeModel).subscribe({
+    next: (response:any) => {
+      this.categories = response.result_data?.categoryInfo;
+    },
+    complete: () => {
+    },
+    error: (error: any) => {
+      console.error('Error fetching categories:', error);
     }
+  });
+}
+
+insertProduct() {    
+  this.productService.inseProduct(this.productDTo).subscribe({
+    next: (response) => {
+      if(response.result_data.file_id){
+       
+      }
+    },
+    error: (error) => {
+      alert(error.error)
+      console.error('Error inserting product:', error);
+    }
+  });    
+}
+changeCategory(e:Event){
+  this.category.push(e.toString());
+}
+
+
+onDragOverSetProduct(event: DragEvent) {
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+onDragLeaveSetProduct(event: DragEvent) {
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+onDragOverListproduct(event: DragEvent) {
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+onDragLeaveListproduct(event: DragEvent) {
+  event.preventDefault();
+  event.stopPropagation();
+}
+onDrop(event: DragEvent) {
+  debugger
+  event.preventDefault();
+  event.stopPropagation();
+  const files = event.dataTransfer?.files;
+  if (files && files.length > 0) {
+    this.readFile(files[0]);
   }
-  
+}
+onDropListProduct(event: DragEvent) {
+  event.preventDefault();
+  event.stopPropagation();
+  const files = event.dataTransfer?.files;
+  if (files && files.length > 0) {
+    this.readFileListProduct(files);
+  }
+}
 
- removeImage(index: number): void {
-   this.imageSrcs.splice(index, 1);
- }
-
- onFileSelectedSetProduct(event: Event): void {
+onFileSelectedSetProduct(event: Event): void {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files[0]) {
     const file = input.files[0] as File; ;
     this.fileName = file.name;
     const reader = new FileReader();
-
     reader.onload = (e: ProgressEvent<FileReader>) => {
       const result = e.target?.result;
       if (result !== undefined) {
@@ -144,48 +182,63 @@ categories: CategoryResponse[] = [];
     reader.readAsDataURL(file);
   }
 }
-onFileInputClickSetProduct(): void {
-  const fileInputP = document.getElementById('fileInputProduct') as HTMLInputElement;
-  fileInputP.click();
-}
 
-// onFileInputClick(): void {
-//   const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-//   fileInput.click();
-// }
-
-getCategories() {
-  this.typeModel = {
-    type: ["PRODUCT_CATEGORY"]
+readFile(file: File) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    this.imageSrcSetProduct = reader.result;
   };
-  this.categoryService.getCategories(this.typeModel).subscribe({
-    next: (response:any) => {
-      this.categories = response.result_data?.categoryInfo;
-    },
-    complete: () => {
-    },
-    error: (error: any) => {
-      console.error('Error fetching categories:', error);
-    }
+  reader.readAsDataURL(file);
+}
+readFileListProduct(files: FileList) {
+  Array.from(files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.images.push({ src: reader.result, name: file.name });
+    };
+    reader.readAsDataURL(file);
   });
 }
-
-insertProduct() {    
-  this.productService.inseProduct(this.productDTo).subscribe({
-    next: (response) => {
-      debugger
-      if(response.result_data.file_id){
-       
-      }
-    },
-    error: (error) => {
-      // Handle error while inserting the product
-      alert(error.error)
-      console.error('Error inserting product:', error);
-    }
-  });    
+onAreaClickSetProduct() {
+  this.fileInputSetProduct.nativeElement.click();
 }
-changeCategory(e:Event){
-  this.category.push(e.toString());
+onDeleteClickSetProduct(event: MouseEvent) {
+  event.stopPropagation();
+  this.imageSrcSetProduct = null;
+}
+
+onFileSelectedListProduct(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    this.readFilesList(input.files);
+  }
+}
+
+onAreaClickListproduct() {
+  this.fileInputSetListProduct.nativeElement.click();
+}
+
+onDeleteClickListProduct(event: MouseEvent, index: number) {
+  event.stopPropagation();
+  this.images.splice(index, 1);
+}
+
+readFilesList(files: FileList) {
+  Array.from(files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.images.push({ src: reader.result, name: file.name });
+    };
+    reader.readAsDataURL(file);
+  });
+}
+openDialog(): void {
+  const dialogRef = this.dialog.open<string>(ShowProductComponent, {
+    width: '250px',
+  });
+
+  dialogRef.closed.subscribe(result => {
+    console.log('The dialog was closed');
+  });
 }
 }

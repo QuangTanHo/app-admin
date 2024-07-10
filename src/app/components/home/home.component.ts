@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../../modules/shared.module';
 
 @Component({
@@ -8,5 +8,11 @@ import { SharedModule } from '../../modules/shared.module';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+    // location.reload();
+  }
 }

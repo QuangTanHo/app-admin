@@ -46,7 +46,9 @@ export class LoginComponent {
               this.userModel = response.result_data;
               this.userService.saveUserResponseToLocalStorage(this.userModel);
               if (this.userModel?.roleId == '1') {
-                this.router.navigate(['/']);
+                this.router.navigate(['/']).then(() => {
+                  window.location.reload();
+                });
               } else if (this.userModel?.roleId == '2') {
                 this.router.navigate(['/login']);
               }

@@ -1,16 +1,4 @@
-// .card {
-//     width: 100%;
-//     margin: 20px;
-//     padding: 20px;
-//     border: 1px solid #ccc;
-//     border-radius: 8px;
-//     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-//   }
-  
-//   .card-title {
-//     font-size: 1.25rem;
-//     font-weight: bold;
-//   }
+
   
   .image-grid {
     display: flex;
@@ -24,7 +12,8 @@
     position: relative;
   }
   .image-preview-set-product{
-    
+    margin: 0 auto;
+    width: calc(50% - 10px);
   }
   .image-preview img {
     width: 100%;
@@ -57,8 +46,37 @@
   }
   
 .form-select{
+    width: 100%;
     padding: 6px;
     border-radius: 4px;
     border: 1px solid #d9dee3;
     outline: none;
+}
+
+.gap-3 {
+  gap: 1rem !important;
+}
+
+.drag-drop-zone {
+  border: 2px dashed #cccccc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.drag-drop-zone:hover {
+  background-color: #f9f9f9;
+}
+
+.drag-drop-zone img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.preview-set-product{
+  .overlay{
+    margin: 22px;
+  }
 }

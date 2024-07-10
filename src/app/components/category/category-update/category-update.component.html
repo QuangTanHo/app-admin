@@ -1,5 +1,5 @@
-<app-blank pageName="Category" [routes]="['category-list']">
-  <app-section sectionTitle="Category List">
+<app-blank pageName="Category" [routes]="['category-update']">
+  <app-section sectionTitle="Category Update">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -18,13 +18,17 @@
         </div>
         <div class="col-md-6">
           <h3>Insert Category</h3>
-          <form  enctype="multipart/form-data">
             <div class="form-group">
               <label for="name">Name:</label>
               <input type="text" id="name"  [(ngModel)]="category.category_name"  name="name" class="form-control" required>
+              <label for="name">Category Parent:</label>
+              <select class="form-select" aria-label="Default select example"  (ngModelChange)="changeCategory($event)" [(ngModel)]="category.category_parent_id">
+                <option selected>Select Category</option>
+                <option *ngFor="let c of categories" [ngValue]="c.category_id">{{ c.category_name }}</option>
+              </select>
             </div>
-            <button type="submit" class="btn btn-primary">Insert</button>
-          </form>
+            
+            <button type="submit" class="btn btn-primary" (click)="updateCategory()" >Update</button>
         </div>
       </div>
     </div>

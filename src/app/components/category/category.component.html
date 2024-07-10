@@ -4,7 +4,7 @@
       <div class="row ">
         <div class="col-md-12">
           <div  class="float-right">
-            <button class="btn btn-success float-md-end" (click)="insertCategory()">+</button>
+            <button class="btn btn-primary float-md-end" (click)="insertCategory()">Thêm Loại Sản phẩmm </button>
           </div>
         </div>
       </div>
@@ -21,15 +21,6 @@
           <tr *ngFor="let category of categories;let i= index">
             <td>{{i+1}}</td>
             <td>{{ category.category_name }}</td>
-            <!-- <td>
-              <div class="group-btn">
-                <button class="btn btn-primary">
-                  Update
-                </button>
-                <button class="btn btn-danger">Delete
-                </button>
-              </div>
-            </td> -->
              <td class="text-end"> 
               <button href="#" class="btn btn-neutral" (click)="updateCategory(category.category_id)"><i class="bi bi-pencil"></i></button>
                <button type="button"

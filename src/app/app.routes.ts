@@ -9,9 +9,12 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { AdminGuardFn } from './guards/admin.guard';
 import { ProductDetailComponent } from './components/product-list/product-detail/product-detail.component';
 import { CategoryComponent } from './components/category/category.component';
-import { CategoryCreateOrUpdateComponent } from './components/category/categoryCreateOrUpdate/categoryCreateOrUpdate.component';
+import { CategoryCreateComponent } from './components/category/categoryCreate/categoryCreate.component';
 import { CategoryUpdateComponent } from './components/category/category-update/category-update.component';
 import { AddProductComponent } from './components/product-list/add-product/add-product.component';
+import { ManageImageComponent } from './components/manage-image/manage-image.component';
+import { UserComponent } from './components/user/user.component';
+import { PostArticleComponent } from './components/post-article/post-article.component';
 
 export const routes: Routes = [
     {
@@ -55,12 +58,29 @@ export const routes: Routes = [
             },
             {
                 path: "add-category",
-                component: CategoryCreateOrUpdateComponent,
+                component: CategoryCreateComponent,
                 canActivate: [AdminGuardFn],
             },
             {
                 path: "update-category/:id",
                 component: CategoryUpdateComponent,
+                canActivate: [AdminGuardFn],
+            },
+            {
+                path: "manage-image",
+                component: ManageImageComponent,
+                canActivate: [AdminGuardFn],
+            }
+            ,
+            {
+                path: "manage-user",
+                component: UserComponent,
+                canActivate: [AdminGuardFn],
+            }
+            ,
+            {
+                path: "manage-article",
+                component: PostArticleComponent,
                 canActivate: [AdminGuardFn],
             }
         ]

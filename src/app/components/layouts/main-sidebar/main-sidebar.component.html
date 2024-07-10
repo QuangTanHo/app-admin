@@ -10,7 +10,7 @@
           <img src="https://www.transparentpng.com/download/user/gray-user-profile-icon-png-fP8Q1P.png" class="img-circle elevation-2" alt="User Image" style="background-color: white;">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ auth.user.firstName }}</a>
+          <a href="#" class="d-block">THIÊUS</a>
         </div>
       </div>
 
@@ -28,7 +28,7 @@
 
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">   
-          @for(menu of menus |menu:search; track menu){
+          @for(menu of filteredMenu |menu:search; track menu){
             @if(menu.isTitle){
               <li class="nav-header">{{menu.name}}</li>
             }@else if(menu.subMenus.length > 0){

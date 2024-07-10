@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { UserModel } from '../models/user.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,14 @@ import { UserModel } from '../models/user.model';
 export class AuthService {
   private readonly TOKEN_KEY = 'access_token';
   token: string = "";
-  user: UserModel = new UserModel();
+
+  user?: UserModel | null;
+
+
 
   constructor(
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) { }
 
   isAuthenticated(){
@@ -30,15 +35,16 @@ export class AuthService {
       this.router.navigateByUrl("/login");
       return false;
     }
-
+    this.user =  new UserModel()
     this.user.userId = decode["Id"];
     this.user.lastName = decode["Name"];
     this.user.email = decode["Email"];
-    // this.user.userName = decode["UserName"];
-
-    console.log(this.user);
-    
 
     return true;
+  }
+
+  hasRole(roleId: string): boolean {
+    this.user = this.userService.getUserResponseFromLocalStorage();
+    return this.user?.roleId === roleId;
   }
 }

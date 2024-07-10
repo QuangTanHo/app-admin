@@ -1,0 +1,125 @@
+.btn-primary {
+    color: #fff;
+    background-color: #696cff;
+    border-color: #696cff;
+    box-shadow: 0 .125rem .25rem 0 rgba(105,108,255,.4)
+}
+
+.btn-primary:hover {
+    color: #fff !important;
+    background-color: #5f61e6 !important;
+    border-color: #5f61e6 !important;
+    transform: translateY(-1px) !important
+}
+
+.btn-check:focus+.btn-primary,.btn-primary:focus,.btn-primary.focus {
+    color: #fff;
+    background-color: #5f61e6;
+    border-color: #5f61e6;
+    transform: translateY(0);
+    box-shadow: none
+}
+
+.btn-check:checked+.btn-primary,.btn-check:active+.btn-primary,.btn-primary:active,.btn-primary.active,.btn-primary.show.dropdown-toggle,.show>.btn-primary.dropdown-toggle {
+    color: #fff !important;
+    background-color: #595cd9 !important;
+    border-color: #595cd9 !important
+}
+
+.btn-check:checked+.btn-primary:focus,.btn-check:active+.btn-primary:focus,.btn-primary:active:focus,.btn-primary.active:focus,.btn-primary.show.dropdown-toggle:focus,.show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: none
+}
+
+.btn-primary.disabled,.btn-primary:disabled {
+    color: #fff !important;
+    background-color: #696cff !important;
+    border-color: #696cff !important;
+    box-shadow: none !important
+}
+
+.btn-label-primary {
+    color: #696cff;
+    border-color: rgba(0,0,0,0);
+    background: #e7e7ff
+}
+
+.btn-label-primary:hover {
+    border-color: rgba(0,0,0,0) !important;
+    background: #5f61e6 !important;
+    color: #fff !important;
+    box-shadow: 0 .125rem .25rem 0 rgba(105,108,255,.4) !important;
+    transform: translateY(-1px) !important
+}
+
+.btn-label-primary:focus,.btn-label-primary.focus {
+    color: #fff;
+    background: #5f61e6;
+    box-shadow: none !important;
+    transform: translateY(0)
+}
+
+.btn-label-primary:active,.btn-label-primary.active,.btn-label-primary.show.dropdown-toggle,.show>.btn-label-primary.dropdown-toggle {
+    color: #fff !important;
+    background-color: #595cd9 !important;
+    border-color: rgba(0,0,0,0) !important
+}
+
+.btn-label-primary:active:focus,.btn-label-primary.active:focus,.btn-label-primary.show.dropdown-toggle:focus,.show>.btn-label-primary.dropdown-toggle:focus {
+    box-shadow: none
+}
+
+.btn-label-primary.disabled,.btn-label-primary:disabled {
+    color: #696cff !important;
+    background-color: #e7e7ff !important;
+    border-color: rgba(0,0,0,0) !important
+}
+
+.btn-outline-primary {
+    color: #696cff;
+    border-color: #696cff;
+    background: rgba(0,0,0,0)
+}
+
+.btn-outline-primary:hover {
+    color: #fff !important;
+    background-color: #5f61e6 !important;
+    border-color: #5f61e6 !important;
+    box-shadow: 0 .125rem .25rem 0 rgba(105,108,255,.4) !important;
+    transform: translateY(-1px) !important
+}
+
+.btn-check:focus+.btn-outline-primary,.btn-outline-primary:focus {
+    color: #fff;
+    background-color: #5f61e6;
+    border-color: #5f61e6;
+    box-shadow: none;
+    transform: translateY(0)
+}
+
+.btn-check:checked+.btn-outline-primary,.btn-check:active+.btn-outline-primary,.btn-outline-primary:active,.btn-outline-primary.active,.btn-outline-primary.dropdown-toggle.show {
+    color: #fff !important;
+    background-color: #595cd9 !important;
+    border-color: #595cd9 !important
+}
+
+.btn-check:checked+.btn-outline-primary:focus,.btn-check:active+.btn-outline-primary:focus,.btn-outline-primary:active:focus,.btn-outline-primary.active:focus,.btn-outline-primary.dropdown-toggle.show:focus {
+    box-shadow: none
+}
+
+.btn-outline-primary.disabled,.btn-outline-primary:disabled {
+    box-shadow: none !important;
+    color: #696cff !important;
+    background-color: rgba(0,0,0,0) !important
+}
+
+.btn-outline-primary .badge {
+    background: #696cff;
+    border-color: #696cff;
+    color: #fff
+}
+
+.btn-outline-primary:hover .badge,.btn-outline-primary:focus:hover .badge,.btn-outline-primary:active .badge,.btn-outline-primary.active .badge,.show>.btn-outline-primary.dropdown-toggle .badge {
+    background: #fff;
+    border-color: #fff;
+    color: #696cff
+}
