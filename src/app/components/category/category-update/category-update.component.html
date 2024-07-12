@@ -3,21 +3,26 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <div class="form-group mb-3">
-            <div class="input-group mb-3">
-              <input type="file" (change)="onFileSelected($event)" id="fileInput" class="d-none" />
-              <input type="text" class="form-control" [value]="fileName" readonly placeholder="No file chosen" />
-              <div class="input-group-append">
-                <button type="button" class="btn btn-primary" (click)="onFileInputClick()">Chọn ảnh</button>
-              </div>
+          <div class="card mb-4">
+            <div class="card-header">
+              Set product Image11
             </div>
-            <div *ngIf="imageSrc" class="image-preview mt-3">
-              <img [src]="imageSrc" alt="Selected Image" class="img-thumbnail" />
+            <div class="drag-drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+              (drop)="onDrop($event)" (click)="onAreaClick()">
+              <p *ngIf="!image.src">Drag and drop an image here, or click to select one</p>
+              <img *ngIf="image.src" [src]="image.src" alt="Uploaded Image" />
+              <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+              <div *ngIf="image.src" class="preview-set-product">
+                <div class="overlay">
+                  <span class="file-name">{{fileName}}</span>
+                  <button class="btn btn-sm btn-danger" (click)="onDeleteClick($event,image.fileId)">Remove</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-md-6">
-          <h3>Insert Category</h3>
+          <h3>Update Category</h3>
             <div class="form-group">
               <label for="name">Name:</label>
               <input type="text" id="name"  [(ngModel)]="category.category_name"  name="name" class="form-control" required>

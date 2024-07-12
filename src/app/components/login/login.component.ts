@@ -37,7 +37,7 @@ export class LoginComponent {
     this.userService.login(this.model).subscribe({
       next: (response: ResultModel<LoginResponseModel>) => {
         const token = response.result_data?.token as string;
-        const userId = response.result_data?.userid as string;
+        const userId = response.result_data?.userId as string;
         if (this.rememberMe) {
           this.tokenService.setToken(token);
           this.userService.getUserById(userId).subscribe({

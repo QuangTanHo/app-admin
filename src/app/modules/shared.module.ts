@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TrCurrencyPipe } from 'tr-currency';
 
 import {MatDialogModule} from "@angular/material/dialog";
+import { PaginationComponent } from '../common/pagination/pagination.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     SectionComponent,
     FormsModule,
     TrCurrencyPipe,
-    MatDialogModule
+    MatDialogModule,
+    PaginationComponent
   ],
   exports: [
     CommonModule,

@@ -28,6 +28,10 @@ export class UploadService {
   }
 
   getInforFileById(fileId: string): Observable<any> {
-    return this.http.get<any>(`${environment.apiBaseUrl}un_auth/files/get-info-file-storage/${fileId}`);
+    return this.http.get<any>(`${environment.apiBaseUrl}un_auth/files/get_info_file_storage/${fileId}`);
+  }
+
+  deleteFileById(fileId: string): Observable<string> {
+    return this.http.delete<string>(`${environment.apiBaseUrl}un_auth/files/delete/${fileId}`);
   }
 }
