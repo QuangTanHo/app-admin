@@ -1,30 +1,32 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TrCurrencyPipe } from 'tr-currency';
 import { BlankComponent } from '../components/blank/blank.component';
 import { SectionComponent } from '../components/section/section.component';
-import { FormsModule } from '@angular/forms';
-import { TrCurrencyPipe } from 'tr-currency';
 
-import {MatDialogModule} from "@angular/material/dialog";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
-  declarations: [    
+  declarations: [
   ],
   imports: [
     CommonModule,
-    BlankComponent, 
+    BlankComponent,
     SectionComponent,
     FormsModule,
     TrCurrencyPipe,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
-    BlankComponent, 
+    BlankComponent,
     SectionComponent,
     FormsModule,
-    TrCurrencyPipe
+    TrCurrencyPipe,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
