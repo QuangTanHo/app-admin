@@ -1,0 +1,15 @@
+export interface ProductRespone {
+    image: string,
+    srcImage :string | ArrayBuffer | null,
+    price: string,
+    quantity: number,
+    product_id: string,
+    image_list: [],
+    product_category_list: [],
+    product_attribute_list: [],
+    product_name:string,
+    description_short: string,
+    description_long: string,
+    create_date: string,
+    modify_date: string,
+}

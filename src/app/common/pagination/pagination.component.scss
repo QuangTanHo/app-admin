@@ -1,0 +1,31 @@
+/* pagination.component.css */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .pagination-controls button {
+    margin: 0 5px;
+    // padding: 5px 10px;
+    border: 1px solid #696cff;
+    background-color: white;
+    color: #696cff;
+    cursor: pointer;
+  }
+  
+  .pagination-controls button.active {
+    font-weight: bold;
+    background-color: #696cff;
+    color: white;
+  }
+  
+  .pagination-controls button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  .btn-page-index{
+    padding: 5px 10px;
+  }
+  

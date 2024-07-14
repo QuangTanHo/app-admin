@@ -21,7 +21,7 @@ export class CategoryService {
     private httpUtilService: HttpUtilService
   ) { }
   getCategories(type :TypeModel): Observable<Category[]> {
-    return this.http.post<Category[]>(`${environment.apiBaseUrl}un_auth/category/get-info-category-type`, type);
+    return this.http.post<Category[]>(`${environment.apiBaseUrl}un_auth/category/get_info_category_type`, type);
   }
   getDetailCategory(category: any): Observable<Category> {
     return this.http.post<Category>(`${this.apiBaseUrl}un_auth/category/category_detail`,category);

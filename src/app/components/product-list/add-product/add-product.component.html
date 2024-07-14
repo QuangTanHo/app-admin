@@ -62,17 +62,19 @@
             </div>
             <div class="card mb-4" (click)="fileInputSetListProduct.click()">
               <div class="card-body">
-                <div class="drag-drop-zone" (dragover)="onDragOverListproduct($event)" (dragleave)="onDragLeaveListproduct($event)"
-                  (drop)="onDropListProduct($event)" (click)="onAreaClickListproduct()">
-                  <p *ngIf="images.length === 0">Drag and drop images here, or click to select</p>
-                  <div *ngFor="let image of images; let i = index" class="image-item">
+                <div class="drag-drop-zone flex-images-item" (dragover)="onDragOverListproduct($event)"
+                  (dragleave)="onDragLeaveListproduct($event)" (drop)="onDropListProduct($event)"
+                  (click)="onAreaClickListproduct()">
+                  <p *ngIf="images.length === 0" class="text-center">Drag and drop images here, or click to select</p>
+                  <div *ngFor="let image of images; let i = index" class="images-item">
                     <img [src]="image.src" [alt]="image.name" />
-                    <div class="file-info">
+                    <div class="overlay-image">
                       <span>{{ image.name }}</span>
-                      <button (click)="onDeleteClickListProduct($event, i)">Delete</button>
+                      <button class="btn btn-sm btn-danger" (click)="onDeleteClickListProduct($event, i)">Remove</button>
                     </div>
                   </div>
-                  <input type="file" (change)="onFileSelectedListProduct($event)" hidden #fileInputSetListProduct multiple />
+                  <input type="file" (change)="onFileSelectedListProduct($event)" hidden #fileInputSetListProduct
+                    multiple />
                 </div>
               </div>
             </div>
@@ -128,14 +130,14 @@
               <div class="card-header">
                 Set product Image
               </div>
-              <div class="drag-drop-zone" (dragover)="onDragOverSetProduct($event)" (dragleave)="onDragLeaveSetProduct($event)"
-                (drop)="onDrop($event)" (click)="onAreaClickSetProduct()">
-                <p *ngIf="!imageSrcSetProduct">Drag and drop an image here, or click to select one</p>
-                <img *ngIf="imageSrcSetProduct" [src]="imageSrcSetProduct" alt="Uploaded Image" />
+              <div class="drag-drop-zone" (dragover)="onDragOverSetProduct($event)"
+                (dragleave)="onDragLeaveSetProduct($event)" (drop)="onDrop($event)" (click)="onAreaClickSetProduct()">
+                <p *ngIf="!image.src">Drag and drop an image here, or click to select one</p>
+                <img *ngIf="image.src" [src]="image.src" alt="Uploaded Image" />
                 <input type="file" (change)="onFileSelectedSetProduct($event)" hidden #fileInputSetProduct />
-                <div *ngIf="imageSrcSetProduct" class="preview-set-product">
-                  <div class="overlay">
-                    <span class="file-name">"fff"</span>
+                <div *ngIf="image.src" class="preview-set-product">
+                  <div class="overlay-image">
+                    <span class="file-name">{{image.name}}</span>
                     <button class="btn btn-sm btn-danger" (click)="onDeleteClickSetProduct($event)">Remove</button>
                   </div>
                 </div>
@@ -189,20 +191,57 @@
               <div class="card-header">
                 <h5 class="card-title mb-0">Organize</h5>
               </div>
-              <div class="card-body" data-select2-id="39">
-                <!-- Category -->
-                <div class="mb-3 col ecommerce-select2-dropdown" data-select2-id="47">
-                  <label class="form-label mb-1 d-flex justify-content-between align-items-center" for="category-org">
-                    <span>Category</span>
-                  </label>
-                  <div class="position-relative" data-select2-id="46">
-                    <select class="form-select" aria-label="Default select example"
-                      (ngModelChange)="changeCategory($event)" [(ngModel)]="categorySelect">
-                      <option selected>Select Category</option>
-                      <option *ngFor="let c of categories" [ngValue]="c.category_id">{{ c.category_name }}</option>
-                    </select>
+              <div class="card-body text-center" >
+                <!--  CLICK theo cha con
+                        <div *ngFor="let category of categories1">
+                          <div>
+                            <input type="checkbox" [(ngModel)]="category.checked" (change)="onCheckboxChange(category)" />
+                            {{ category.category_name }}
+                          </div>
+                          <div *ngIf="category.category_parent_id && category.category_parent_id.length > 0" style="margin-left: 20px;">
+                            <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: category.category_parent_id }"></ng-container>
+                          </div>
+                        </div>
+                        
+                        <ng-template #recursiveList let-categories>
+                          <div *ngFor="let category of categories">
+                            <div>
+                              <input type="checkbox" [(ngModel)]="category.checked" (change)="onCheckboxChange(category)" />
+                              {{ category.category_name }}
+                            </div>
+                            <div *ngIf="category.category_parent_id && category.category_parent_id.length > 0" style="margin-left: 20px;">
+                              <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: category.category_parent_id }"></ng-container>
+                            </div>
+                          </div>
+                        </ng-template>
+                        
+                        <button (click)="logCheckedCategoryIds()">Log Checked Categories</button> -->
+            
+            
+                <!-- <button (click)="logSelectedIds()">Get Selected IDs</button> -->
+                <div *ngFor="let category of categories">
+                  <div>
+                    <input type="checkbox" [(ngModel)]="category.checked" />
+                    {{ category.category_name }}
+                  </div>
+                  <div *ngIf="category.category_parent_id && category.category_parent_id.length > 0" style="margin-left: 20px;">
+                    <ng-container
+                      *ngTemplateOutlet="recursiveList; context:{ $implicit: category.category_parent_id }"></ng-container>
                   </div>
                 </div>
+            
+                <ng-template #recursiveList let-categories>
+                  <div *ngFor="let category of categories">
+                    <div>
+                      <input type="checkbox" [(ngModel)]="category.checked" />
+                      {{ category.category_name }}
+                    </div>
+                    <div *ngIf="category.category_parent_id && category.category_parent_id.length > 0" style="margin-left: 20px;">
+                      <ng-container
+                        *ngTemplateOutlet="recursiveList; context:{ $implicit: category.category_parent_id }"></ng-container>
+                    </div>
+                  </div>
+                </ng-template>
               </div>
             </div>
 
@@ -212,5 +251,9 @@
         </div>
       </div>
     </div>
+
+    <!-- <button mat-button [matMenuTriggerFor]="menu">Open Menu</button> -->
+
+<!-- VEJqciNYnKeOAIIjBYalMKQjrnQqguRW -->
   </app-section>
 </app-blank>

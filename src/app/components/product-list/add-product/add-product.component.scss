@@ -20,7 +20,7 @@
     object-fit: cover;
   }
   
-  .overlay {
+  .overlay-image {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -60,7 +60,7 @@
 .drag-drop-zone {
   border: 2px dashed #cccccc;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   cursor: pointer;
 }
@@ -76,7 +76,29 @@
 }
 
 .preview-set-product{
-  .overlay{
+  .overlay-image{
     margin: 22px;
   }
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+li {
+  margin: 5px 0;
+}
+.flex-images-item{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.images-item{
+  display: flex;
+  flex-wrap: wrap;
+  width: 24%; 
+  margin-bottom: 10px; 
+  position: relative;
 }

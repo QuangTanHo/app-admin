@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from "@angular/material/dialog";
 import { TrCurrencyPipe } from 'tr-currency';
+import { PaginationComponent } from '../common/pagination/pagination.component';
 import { BlankComponent } from '../components/blank/blank.component';
 import { SectionComponent } from '../components/section/section.component';
-
-import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     FormsModule,
     TrCurrencyPipe,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginationComponent
   ],
   exports: [
     CommonModule,

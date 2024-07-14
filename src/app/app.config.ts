@@ -7,6 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr } from 'ngx-toastr';
+import {MatIconModule} from '@angular/material/icon';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,8 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       BrowserAnimationsModule,
       NgxSpinnerModule,
+      MatIconModule
+
     ), provideAnimationsAsync(),
     provideAnimations(), // required animations providers
     provideToastr(

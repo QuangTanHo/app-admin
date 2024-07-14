@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from '../../../modules/shared.module';
 import { UploadService } from '../../../services/upload.service';
 import { CategoryService } from '../../../services/category.service';
@@ -19,6 +19,7 @@ import { ToastService } from '../../../common/toast.service';
   styleUrls: ['./categoryCreate.component.scss']
 })
 export class CategoryCreateComponent implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef;
   imageSrc: string | ArrayBuffer | null = null;
   typeModel? :TypeModel;
   categories: CategoryResponse[] = []; 
@@ -106,7 +107,6 @@ export class CategoryCreateComponent implements OnInit {
       }
     } catch (error) {
       this.spinner.hide();
-      console.error('Upload lỗi :', error);
       return null;
     }
   }
@@ -181,5 +181,36 @@ export class CategoryCreateComponent implements OnInit {
         
       }
     });     
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.readFile(files[0]);
+    }
+  }
+  readFile(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageSrc = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  onAreaClick() {
+    this.fileInput.nativeElement.click();
+  }
+  onDeleteClick(event: MouseEvent) {
+    event.stopPropagation();
+    this.imageSrc = null;
   }
 }

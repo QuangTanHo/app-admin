@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UploadService } from '../../../services/upload.service';
 import { CategoryService } from '../../../services/category.service';
 import { ActivatedRoute } from '@angular/router';
@@ -17,8 +17,9 @@ import { UploadFile } from '../../../models/uploadFile';
   styleUrls: ['./category-update.component.scss']
 })
 export class CategoryUpdateComponent implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef;
   categoryId?: string;
-  imageSrc: string | ArrayBuffer | null = null;
+  image: { src: string | ArrayBuffer | null, fileId: string, name: string } = { src: null, fileId: '', name: '' };
   file: File | null = null; // Declare file as a global variable
   fileName: string = '';
   category?: any;
@@ -48,6 +49,53 @@ export class CategoryUpdateComponent implements OnInit {
      this.getCategoryDetails();
     }
   }
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.readFile(files[0]);
+    }
+  }
+  readFile(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.image.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  onAreaClick() {
+    this.fileInput.nativeElement.click();
+  }
+  onDeleteClick(event: MouseEvent, fileId :string) {
+    event.stopPropagation();
+    this.image.src = null;
+    if(fileId){
+      this.uploadService.deleteFileById(fileId).subscribe({
+        next: (res :any) => {
+          if (res.result_code === 1) {
+            this.toatsService.showSuccess(res.result_msg);
+          }else if(res.result_code === 0){
+            this.toatsService.showError(res.result_data.msg);
+          }
+        },
+        error: (error) => {
+          this.toatsService.showError(error);
+        }
+      }); 
+    }
+    this.image.fileId = '';
+    this.category.file_id='';
+
+  }
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -58,7 +106,7 @@ export class CategoryUpdateComponent implements OnInit {
       reader.onload = (e: ProgressEvent<FileReader>) => {
         const result = e.target?.result;
         if (result !== undefined) {
-          this.imageSrc = result;
+          this.image.src  = result;
           this.uploadFile.file_name =this.fileName;
           this.uploadFile.file=file;
         }
@@ -66,10 +114,6 @@ export class CategoryUpdateComponent implements OnInit {
 
       reader.readAsDataURL(file);
     }
-  }
-  onFileInputClick(): void {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    fileInput.click();
   }
   changeCategory(e:Event){
     this.category.category_parent_id = e.toString();
@@ -100,6 +144,7 @@ export class CategoryUpdateComponent implements OnInit {
       next: (response : any) => { 
         if(response){
         this.category = response.result_data;
+        this.category.category_parent_id = response.result_data.category_parent_id[0].category_id;
         if(this.category.file_id){
           this.getImagebById();
         }
@@ -125,7 +170,8 @@ getImagebById(){
               if(imageBlob){
                 const reader = new FileReader();
                 reader.onload = () => {
-                  this.imageSrc = reader.result;
+                  this.image.src = reader.result;
+                  this.image.fileId = this.category.file_id;
                 };
                 reader.readAsDataURL(imageBlob);
               }
@@ -183,5 +229,7 @@ async  updateCategory() {
   });
 
 }
+
+
 
 }
