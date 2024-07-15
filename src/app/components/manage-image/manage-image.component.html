@@ -26,7 +26,7 @@
                   <div class="overlay">
                     <span>{{ image.name }}</span>
                     <button class="btn btn-sm btn-danger"
-                            (click)="onDeleteClickListSlide($event, i)">Delete</button>
+                            (click)="onDeleteClickListSlide($event, i,image.file_id)">Delete</button>
                   </div>
                 </div>
                 <input type="file"
@@ -36,6 +36,9 @@
                        multiple />
               </div>
             </div>
+          </div>
+          <div>
+            <button (click)="handleSaveListImageSlide()">Save</button>
           </div>
         </div>
         <div class="col-12 col-lg-4">
@@ -58,7 +61,7 @@
                   <div class="overlay">
                     <span>{{ image.name }}</span>
                     <button class="btn btn-sm btn-danger"
-                            (click)="onDeleteClickListBanner($event, i)">Delete</button>
+                            (click)="onDeleteClickListBanner($event, i,image.file_id)">Delete</button>
                   </div>
                 </div>
                 <input type="file"
@@ -68,6 +71,9 @@
                        multiple />
               </div>
             </div>
+          </div>
+          <div>
+            <button (click)="handleSaveListImageBanner()">Save</button>
           </div>
         </div>
       </div>

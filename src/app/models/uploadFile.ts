@@ -6,3 +6,7 @@ export interface UploadFile {
     doc_type_id:string;
     type:string;
 }
+
+export interface FileImageRequest {
+  type: string[];
+}

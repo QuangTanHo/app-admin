@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UploadFile } from '../models/uploadFile';
 import { environment } from '../../environments/environment';
+import { FileImageRequest, UploadFile } from '../models/uploadFile';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,12 @@ export class UploadService {
     formData.append('doc_type_id', upload.doc_type_id);
     formData.append('type', upload.type);
     return this.http.post<UploadFile[]>(`${environment.apiBaseUrl}un_auth/files/upload_file`, formData);
+  }
+
+  getListImage(file: FileImageRequest): Observable<UploadFile[]> {
+    const url = `${environment.apiBaseUrl}un_auth/files/get_info_file_type`;
+
+    return this.http.post<UploadFile[]>(url, file);
   }
 
   getOriginalImage(fileId: string): Observable<Blob> {
