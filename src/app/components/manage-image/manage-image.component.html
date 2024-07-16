@@ -1,8 +1,82 @@
-
-<app-blank pageName="Category" [routes]="['category-create']">
-  <app-section sectionTitle="Category Create">
-    <p>
-  manage-image works!
-    </p>
+<app-blank pageName="Category"
+           [routes]="['category-create']">
+  <app-section sectionTitle="Manage Image">
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="py-3 mb-4">
+        <span class="text-muted fw-light">eCommerce /</span><span> Add Image</span>
+      </h4>
+      <div class="row">
+        <div class="col-12 col-lg-4">
+          <div class="card mb-4"
+               (click)="fileInputSetListSlide.click()">
+            <div class="card-header">
+              Set List Slide Image
+            </div>
+            <div class="card-body">
+              <div class="drag-drop-zone"
+                   (dragover)="onDragOverListSlide($event)"
+                   (dragleave)="onDragLeaveListSlide($event)"
+                   (drop)="onDropListSlide($event)"
+                   (click)="onAreaClickListSlide()">
+                <p *ngIf="imageListSlide.length === 0">Drag and drop images here or click to select multiple images</p>
+                <div *ngFor="let image of imageListSlide; let i = index"
+                     class="image-item">
+                  <img [src]="image.src"
+                       [alt]="image.name" />
+                  <div class="overlay">
+                    <span>{{ image.name }}</span>
+                    <button class="btn btn-sm btn-danger"
+                            (click)="onDeleteClickListSlide($event, i,image.file_id)">Delete</button>
+                  </div>
+                </div>
+                <input type="file"
+                       (change)="onFileSelectedListSlide($event)"
+                       hidden
+                       #fileInputSetListSlide
+                       multiple />
+              </div>
+            </div>
+          </div>
+          <div>
+            <button (click)="handleSaveListImageSlide()">Save</button>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="card mb-4"
+               (click)="fileInputSetListBanner.click()">
+            <div class="card-header">
+              Set List Banner Image
+            </div>
+            <div class="card-body">
+              <div class="drag-drop-zone"
+                   (dragover)="onDragOverListBanner($event)"
+                   (dragleave)="onDragLeaveListBanner($event)"
+                   (drop)="onDropListBanner($event)"
+                   (click)="onAreaClickListBanner()">
+                <p *ngIf="imageListBanner.length === 0">Drag and drop images here or click to select multiple images</p>
+                <div *ngFor="let image of imageListBanner; let i = index"
+                     class="image-item">
+                  <img [src]="image.src"
+                       [alt]="image.name" />
+                  <div class="overlay">
+                    <span>{{ image.name }}</span>
+                    <button class="btn btn-sm btn-danger"
+                            (click)="onDeleteClickListBanner($event, i,image.file_id)">Delete</button>
+                  </div>
+                </div>
+                <input type="file"
+                       (change)="onFileSelectedListBanner($event)"
+                       hidden
+                       #fileInputSetListBanner
+                       multiple />
+              </div>
+            </div>
+          </div>
+          <div>
+            <button (click)="handleSaveListImageBanner()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </app-section>
 </app-blank>

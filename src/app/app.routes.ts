@@ -1,26 +1,25 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { LayoutsComponent } from './components/layouts/layouts.component';
-import { HomeComponent } from './components/home/home.component';
-import { inject } from '@angular/core';
-import { AuthService } from './services/auth.service';
-import { ExamplesComponent } from './components/examples/examples.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { AdminGuardFn } from './guards/admin.guard';
-import { ProductDetailComponent } from './components/product-list/product-detail/product-detail.component';
+import { AddAttributeComponent } from './components/attribute/add-attribute/add-attribute.component';
+import { AttributeComponent } from './components/attribute/attribute.component';
+import { UpdateAttributeComponent } from './components/attribute/update-attribute/update-attribute.component';
+import { CategoryUpdateComponent } from './components/category/category-update/category-update.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryCreateComponent } from './components/category/categoryCreate/categoryCreate.component';
-import { CategoryUpdateComponent } from './components/category/category-update/category-update.component';
-import { AddProductComponent } from './components/product-list/add-product/add-product.component';
+import { ExamplesComponent } from './components/examples/examples.component';
+import { HomeComponent } from './components/home/home.component';
+import { LayoutsComponent } from './components/layouts/layouts.component';
+import { LoginComponent } from './components/login/login.component';
 import { ManageImageComponent } from './components/manage-image/manage-image.component';
-import { UserComponent } from './components/user/user.component';
-import { PostArticleComponent } from './components/post-article/post-article.component';
-import { UpdateProductComponent } from './components/product-list/update-product/update-product.component';
-import { UpdateArticleComponent } from './components/post-article/update-article/update-article.component';
 import { AddArticleComponent } from './components/post-article/add-article/add-article.component';
-import { AttributeComponent } from './components/attribute/attribute.component';
-import { AddAttributeComponent } from './components/attribute/add-attribute/add-attribute.component';
-import { UpdateAttributeComponent } from './components/attribute/update-attribute/update-attribute.component';
+import { PostArticleComponent } from './components/post-article/post-article.component';
+import { UpdateArticleComponent } from './components/post-article/update-article/update-article.component';
+import { AddProductComponent } from './components/product-list/add-product/add-product.component';
+import { ProductDetailComponent } from './components/product-list/product-detail/product-detail.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { UpdateProductComponent } from './components/product-list/update-product/update-product.component';
+import { AddEditUserComponent } from './components/user/add-edit-user/add-edit-user.component';
+import { UserComponent } from './components/user/user.component';
+import { AdminGuardFn } from './guards/admin.guard';
 
 export const routes: Routes = [
     {
@@ -93,6 +92,16 @@ export const routes: Routes = [
                 path: "list-article",
                 component: PostArticleComponent,
                 canActivate: [AdminGuardFn],
+            },
+            {
+              path: "add-user",
+              component: AddEditUserComponent,
+              canActivate: [AdminGuardFn],
+            },
+            {
+              path: "update-user/:id",
+              component: AddEditUserComponent,
+              canActivate: [AdminGuardFn],
             },
             {
                 path: "add-article",

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { HttpUtilService } from './http.util.service';
 import { LoginModel } from '../models/login.model';
-import { UserModel } from '../models/user.model';
+import { UserModel, UserResponse } from '../models/user.model';
+import { HttpUtilService } from './http.util.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +12,8 @@ import { UserModel } from '../models/user.model';
 export class UserService {
     private apiLogin = `${environment.apiBaseUrl}un_auth/signin`;
     private apiUser= `${environment.apiBaseUrl}un_auth/user/`;
+    private apiBaseUrl = environment.apiBaseUrl;
+    private token = localStorage.getItem('access_token') ?? '';;
 
     private apiConfig = {
         headers: this.httpUtilService.createHeaders(),
@@ -21,10 +23,22 @@ export class UserService {
         private http: HttpClient,
         private httpUtilService: HttpUtilService
     ) { }
+    getListUser(params: any): Observable<UserResponse[]> {
+      return this.http.get<UserResponse[]>(`${this.apiUser}user_list`);
+    }
 
-    // register(registerDTO: RegisterDTO): Observable<any> {
-    //     return this.http.post(this.apiRegister, registerDTO, this.apiConfig);
-    // }
+  getUserDetail(userId: any): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.apiUser}${userId}`);
+  }
+
+  deleteUser(userId: string): Observable<string> {
+    return this.http.delete<string>(`${this.apiBaseUrl}admin/user/delete/${userId}`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token}`
+      })
+    })
+  }
 
     login(loginModel: LoginModel): Observable<any> {
         return this.http.post(this.apiLogin, loginModel, this.apiConfig);
@@ -32,7 +46,9 @@ export class UserService {
     getUserById(userId :string): Observable<UserModel> {
         return this.http.get<UserModel>(`${this.apiUser}${userId}`);
       }
-
+  updateUser(user: UserResponse): Observable<any> {
+    return this.http.post<UserResponse>(`${this.apiUser}user_update`, user);
+  }
  saveUserResponseToLocalStorage(userResponse?: UserModel) {
         try {
             if (userResponse == null || !userResponse) {
@@ -56,7 +72,7 @@ export class UserService {
             return userResponse;
         } catch (error) {
             console.error('Error retrieving user response from local storage:', error);
-            return null; 
+            return null;
         }
     }
     removeUserFromLocalStorage(): void {
