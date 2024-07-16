@@ -1,0 +1,65 @@
+
+<app-blank pageName="Article" [routes]="['article-create']">  
+  <app-section sectionTitle="Article Create">
+    <div class="row">
+    <div class="col-12" >
+      <!-- Product Information -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <div class="d-flex">
+            <h5 class="card-tile mb-0">Article information</h5>
+            <button type="submit" (click)="updateArticle()" class="btn btn-primary">PUSH</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label" >Title</label>
+            <input type="text" class="form-control" [(ngModel)]="articleDTo.article_name"
+               placeholder="title">
+          </div>
+          <div class="row mb-3">
+            <div class="col"><label class="form-label" >Slug</label>
+              <input type="text" class="form-control" placeholder="Slug" [(ngModel)]="articleDTo.slug" >
+            </div>
+            <div class="col"><label class="form-label" >Status</label>
+              <select  [(ngModel)]="articleDTo.status"
+              class="select2 form-select select2-hidden-accessible" >
+              <option value="PUBLISHED">Published</option>
+              <option value="PENDING">Pending</option>
+              <option value="DRAFT">Draft</option>
+            </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header">
+          Set product Image
+        </div>
+        <div class="drag-drop-zone" (dragover)="onDragOverSetProduct($event)"
+          (dragleave)="onDragLeaveSetProduct($event)" (drop)="onDrop($event)" (click)="onAreaClickSetProduct()">
+          <p *ngIf="!image.src">Drag and drop an image here, or click to select one</p>
+          <img *ngIf="image.src" [src]="image.src" alt="Uploaded Image" />
+          <input type="file" (change)="onFileSelectedSetProduct($event)" hidden #fileInputSetProduct />
+          <div *ngIf="image.src" class="preview-set-product">
+            <div class="overlay-image">
+              <span class="file-name">{{image.name}}</span>
+              <button class="btn btn-sm btn-danger" (click)="onDeleteClickSetProduct($event)">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <angular-editor id="editor1" [(ngModel)]="htmlContent" [config]="editorConfig">
+  <ng-template #customButtons let-executeCommandFn="executeCommandFn">
+    <ae-toolbar-set>
+      <ae-button iconClass="fa fa-html5" title="Angular editor logo"
+                 (buttonClick)="executeCommandFn('insertHtml', '')">
+      </ae-button>
+    </ae-toolbar-set>
+  </ng-template>
+</angular-editor>
+<!-- <button (click)="updateArticle()">Update</button> -->
+  </app-section>
+  </app-blank>

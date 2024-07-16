@@ -1,7 +1,7 @@
 <app-blank pageName="Product" [routes]="['product-list']">
   <app-section sectionTitle="Product List">
     <div class="card">
-      <div class="card-header">
+      <!-- <div class="card-header">
         <h5 class="card-title">Filter</h5>
         <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
           <div class="col-md-4 product_status"><select id="ProductStatus" class="form-select text-capitalize">
@@ -25,67 +25,60 @@
               <option value="In_Stock">In Stock</option>
             </select></div>
         </div>
-      </div>
+      </div> -->
       <div class="card-datatable table-responsive">
-        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+        <div  class="dataTables_wrapper dt-bootstrap5 no-footer">
           <div class="card-header d-flex border-top rounded-0 flex-wrap py-md-0">
-            <div class="me-5 ms-n2 pe-5">
-              <div id="DataTables_Table_0_filter" class="dataTables_filter"><label>
-                <input type="search" [(ngModel)]="productDTO.product_name"
-                    class="form-control" placeholder="Search Product" aria-controls="DataTables_Table_0">
-                    <button  class="btn btn-secondary add-new btn-primary" (click)="searchProduct()">Search</button>
-                  </label></div>
+            <div class="me-5 ms-n2 pe-5  ">
+              <div class="">
+                    <input type="search" [(ngModel)]="productDTO.product_name"    (keyup.enter)="searchProduct()"
+                    class="form-control" placeholder="Search Product" >
+              </div>
+              
             </div>
             <div class="d-flex justify-content-start justify-content-md-end align-items-baseline">
               <div
                 class="dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0">
-                <div class="dataTables_length mt-0 mt-md-3 me-3" id="DataTables_Table_0_length"><label>
+                <div class="dataTables_length mt-0 mt-md-3 me-3">
                   <select class="form-select"  [(ngModel)]="productDTO.page_size" (ngModelChange)="searchProduct()">
-                    <option value="1">1</option>
-                      <option value="7">7</option>
                       <option value="10">10</option>
                       <option value="20">20</option>
                       <option value="50">50</option>
                       <option value="70">70</option>
                       <option value="100">100</option>
-                    </select></label></div>
+                    </select></div>
                 <div class="dt-buttons btn-group flex-wrap d-flex">
                  
-                  <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0"
+                  <button class="btn btn-secondary add-new btn-primary" 
                     type="button"><span><i class="bx bx-plus me-0 me-sm-1"></i><span
                         class="d-none d-sm-inline-block">Add Product</span></span></button>
                 </div>
               </div>
             </div>
           </div>
-          <table class="datatables-products table border-top dataTable no-footer dtr-column" id="DataTables_Table_0"
-            aria-describedby="DataTables_Table_0_info">
+          <table class="datatables-products table border-top dataTable no-footer dtr-column" >
             <thead>
               <tr>
-                <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1"
-                  style="width: 0px; display: none;" aria-label=""></th>
-
-                <th class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                  style="width: 434px;" aria-label="product: activate to sort column descending" aria-sort="ascending">
+                <th class="sorting sorting_asc" rowspan="1" colspan="1"
+                  style="width: 434px;"  aria-sort="ascending">
                   product</th>
-                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                  style="width: 137px;" aria-label="category: activate to sort column ascending">category</th>
-                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 60px;" aria-label="stock">stock</th>
-                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                  style="width: 51px;" aria-label="sku: activate to sort column ascending">sku</th>
-                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                  style="width: 81px;" aria-label="price: activate to sort column ascending">price</th>
-                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                  style="width: 39px;" aria-label="qty: activate to sort column ascending">qty</th>
-                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                  style="width: 103px;" aria-label="status: activate to sort column ascending">status</th>
-                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;" aria-label="Actions">Actions
+                <th class="sorting" rowspan="1" colspan="1"
+                  style="width: 137px;" >category</th>
+                <th class="sorting" rowspan="1" colspan="1"
+                  style="width: 51px;">sku</th>
+                <th class="sorting" rowspan="1" colspan="1"
+                  style="width: 81px;">price</th>
+                <th class="sorting" rowspan="1" colspan="1"
+                  style="width: 39px;">quantity</th>
+                <th class="sorting" rowspan="1" colspan="1"
+                  style="width: 103px;">status</th>
+                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;">Actions
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr class="odd even"  *ngFor="let product of productRespone; let i= index">
-                <td class=" control" tabindex="0" style="display: none;"></td>
+                <td class=" control"  style="display: none;"></td>
 
                 <td class="sorting_1">
                   <div class="d-flex justify-content-start align-items-center product-name">
@@ -95,24 +88,20 @@
                     </div>
                     <div class="d-flex flex-column">
                       <h6 class="text-body text-nowrap mb-0 f-s-16">{{product.product_name}}</h6><small
-                        class="text-muted text-truncate d-none d-sm-block">Air Jordan is a line of basketball shoes
-                        produced by Nike</small>
+                        class="text-muted text-truncate d-none d-sm-block">{{product.description_short}}</small>
                     </div>
                   </div>
                 </td>
                 <td><span class="text-truncate d-flex align-items-center"><span
                       class="avatar-sm rounded-circle d-flex justify-content-center align-items-center bg-label-info me-2"><i
                         class="bx bx-walk"></i></span>Shoes</span></td>
-                <td><span class="text-truncate"><label class="switch switch-primary switch-sm"><input type="checkbox"
-                        class="switch-input" id="switch"><span class="switch-toggle-slider"><span
-                          class="switch-off"></span></span></label><span class="d-none">Out_of_Stock</span></span></td>
+                 <td><span>Sku Id</span></td>
                 <td><span>{{product.price}}</span></td>
                 <td><span>{{product.quantity}}</span></td>
-                <td><span>942</span></td>
-                <td><span class="badge bg-label-danger" text-capitalized="">Inactive</span></td>
+                <td><span>Active</span></td>
                 <td>
                   <div class="d-inline-block text-nowrap">
-                    <button class="btn btn-sm btn-icon">
+                    <button class="btn btn-sm btn-icon" (click)="updateProduct(product)">
                       <mat-icon>edit</mat-icon>
                     </button>
                     <button class="btn btn-sm btn-icon btn-delete-product" (click)="deleteProduct(product)">
@@ -124,12 +113,9 @@
  
             </tbody>
           </table>
-
           <app-pagination [data]="this.productRespone" [totalRecords]="totalRecords" [pageSize]="this.productDTO.page_size"
             (pageChanged)="onPageChanged($event)">
           </app-pagination>
-          
-          <div style="width: 1%;"></div>
         </div>
       </div>
     </div>

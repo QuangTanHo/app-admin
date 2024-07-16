@@ -1,0 +1,41 @@
+<app-blank pageName="attribute" [routes]="['attribute-create']">
+  <app-section sectionTitle="attribute Create">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mb-4">
+              <div class="card-header">
+                Set product Image
+              </div>
+              <div class="drag-drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+                (drop)="onDrop($event)" (click)="onAreaClick()">
+                <p *ngIf="!imageSrc">Drag and drop an image here, or click to select one</p>
+                <img *ngIf="imageSrc" [src]="imageSrc" alt="Uploaded Image" />
+                <input type="file" (change)="onFileSelected($event)" hidden #fileInput />
+                <div *ngIf="imageSrc" class="preview-set-product">
+                  <div class="overlay">
+                    <span class="file-name">{{fileName}}</span>
+                    <button class="btn btn-sm btn-danger" (click)="onDeleteClick($event)">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+          <h3>Insert attribute</h3>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name"  [(ngModel)]="attribute.attribute_name"  name="name" class="form-control" required>
+              <label for="name">attribute Parent:</label>
+              <select class="form-select" aria-label="Default select example"  (ngModelChange)="changeAttribute($event)" [(ngModel)]="attribute.attribute_parent_id">
+                <option selected>Select attribute</option>
+                <option *ngFor="let c of attributes" [ngValue]="c.attribute_id">{{ c.attribute_name }}</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" (click)="insertattribute()">Insert</button>
+        </div>
+      </div>
+    </div>
+</app-section>
+</app-blank>

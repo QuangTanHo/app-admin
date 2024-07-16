@@ -15,6 +15,12 @@ import { AddProductComponent } from './components/product-list/add-product/add-p
 import { ManageImageComponent } from './components/manage-image/manage-image.component';
 import { UserComponent } from './components/user/user.component';
 import { PostArticleComponent } from './components/post-article/post-article.component';
+import { UpdateProductComponent } from './components/product-list/update-product/update-product.component';
+import { UpdateArticleComponent } from './components/post-article/update-article/update-article.component';
+import { AddArticleComponent } from './components/post-article/add-article/add-article.component';
+import { AttributeComponent } from './components/attribute/attribute.component';
+import { AddAttributeComponent } from './components/attribute/add-attribute/add-attribute.component';
+import { UpdateAttributeComponent } from './components/attribute/update-attribute/update-attribute.component';
 
 export const routes: Routes = [
     {
@@ -52,6 +58,11 @@ export const routes: Routes = [
                 canActivate: [AdminGuardFn],
             },
             {
+                path: "update-product/:id",
+                component: UpdateProductComponent,
+                canActivate: [AdminGuardFn],
+            },
+            {
                 path: "category",
                 component: CategoryComponent,
                 canActivate: [AdminGuardFn],
@@ -79,8 +90,36 @@ export const routes: Routes = [
             }
             ,
             {
-                path: "manage-article",
+                path: "list-article",
                 component: PostArticleComponent,
+                canActivate: [AdminGuardFn],
+            },
+            {
+                path: "add-article",
+                component: AddArticleComponent,
+                canActivate: [AdminGuardFn],
+            },
+            {
+                path: "update-article/:id",
+                component: UpdateArticleComponent,
+                canActivate: [AdminGuardFn],
+            }
+            ,
+            {
+                path: "attribute",
+                component: AttributeComponent,
+                canActivate: [AdminGuardFn],
+            }
+            ,
+            {
+                path: "add-attribute",
+                component: AddAttributeComponent,
+                canActivate: [AdminGuardFn],
+            }
+            ,
+            {
+                path: "update-attribute/:id",
+                component: UpdateAttributeComponent,
                 canActivate: [AdminGuardFn],
             }
         ]

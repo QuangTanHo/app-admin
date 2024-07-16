@@ -7,6 +7,8 @@ import { ToastService } from '../../common/toast.service';
 import { ProductRespone } from '../../reponse/productRespone';
 import { UploadService } from '../../services/upload.service';
 import { PaginationComponent } from '../../common/pagination/pagination.component';
+import { Router } from '@angular/router';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-product-list',
@@ -30,7 +32,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService : ProductService,
     private uploadService : UploadService,
-    private toatService : ToastService
+    private toatService : ToastService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -43,7 +46,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getProduct(this.productDTO).subscribe({
       next: (response:any) => {
         this.productRespone = response.result_data.list_product;
-        this.totalRecords = 20;
+        this.totalRecords = response.result_data.total_records;
         this.productRespone.forEach( x =>{
           if(x.image){
           this.getImageById(x.image).then((result) => {
@@ -110,5 +113,9 @@ export class ProductListComponent implements OnInit {
         }
       });
     }
+  }
+
+  updateProduct(product: ProductRespone) {
+    this.router.navigate(['/update-product', product.product_id]);
   }
 }
