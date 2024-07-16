@@ -19,7 +19,7 @@ export const Menus: MenuModel[] = [
     {
         name: "Product",
         icon: "fab fa-product-hunt",
-        url: "/examples",
+        url: "/product-list",
         isTitle: false,
         subMenus: [
             {
@@ -46,6 +46,15 @@ export const Menus: MenuModel[] = [
                 subMenus: [],
                 roles: ['1']
             },
+            {
+                name: "Attribute List",
+                icon: "fa fa-list-alt",
+                url: "/attribute",
+                isTitle: false,
+                subMenus: [],
+                roles: ['1']
+            },
+            
         ],
         roles: ['1']
     },
@@ -60,9 +69,34 @@ export const Menus: MenuModel[] = [
     {
         name: "manage-article",
         icon: "fa-solid fa-newspaper",
-        url: "/manage-article",
+        url: "/list-article",
         isTitle: false,
-        subMenus: [],
+        subMenus: [
+            {
+                name: "Article List",
+                icon: "fab fa-product-hunt",
+                url: "/list-article",
+                isTitle: false,
+                subMenus: [],
+                roles: ['1']
+            },
+            {
+                name: "Add Article",
+                icon: "fab fa-product-hunt",
+                url: "/add-article",
+                isTitle: false,
+                subMenus: [],
+                roles: ['1']
+            },
+            {
+                name: "Update Article",
+                icon: "fas fa-plus",
+                url: "/update-product",
+                isTitle: false,
+                subMenus: [],
+                roles: ['1']
+            },
+        ],
         roles: ['1']
     },
     {

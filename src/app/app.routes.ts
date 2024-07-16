@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { AddAttributeComponent } from './components/attribute/add-attribute/add-attribute.component';
+import { AttributeComponent } from './components/attribute/attribute.component';
+import { UpdateAttributeComponent } from './components/attribute/update-attribute/update-attribute.component';
 import { CategoryUpdateComponent } from './components/category/category-update/category-update.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryCreateComponent } from './components/category/categoryCreate/categoryCreate.component';
@@ -7,10 +10,13 @@ import { HomeComponent } from './components/home/home.component';
 import { LayoutsComponent } from './components/layouts/layouts.component';
 import { LoginComponent } from './components/login/login.component';
 import { ManageImageComponent } from './components/manage-image/manage-image.component';
+import { AddArticleComponent } from './components/post-article/add-article/add-article.component';
 import { PostArticleComponent } from './components/post-article/post-article.component';
+import { UpdateArticleComponent } from './components/post-article/update-article/update-article.component';
 import { AddProductComponent } from './components/product-list/add-product/add-product.component';
 import { ProductDetailComponent } from './components/product-list/product-detail/product-detail.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { UpdateProductComponent } from './components/product-list/update-product/update-product.component';
 import { AddEditUserComponent } from './components/user/add-edit-user/add-edit-user.component';
 import { UserComponent } from './components/user/user.component';
 import { AdminGuardFn } from './guards/admin.guard';
@@ -51,6 +57,11 @@ export const routes: Routes = [
                 canActivate: [AdminGuardFn],
             },
             {
+                path: "update-product/:id",
+                component: UpdateProductComponent,
+                canActivate: [AdminGuardFn],
+            },
+            {
                 path: "category",
                 component: CategoryComponent,
                 canActivate: [AdminGuardFn],
@@ -78,7 +89,7 @@ export const routes: Routes = [
             }
             ,
             {
-                path: "manage-article",
+                path: "list-article",
                 component: PostArticleComponent,
                 canActivate: [AdminGuardFn],
             },
@@ -91,6 +102,34 @@ export const routes: Routes = [
               path: "update-user/:id",
               component: AddEditUserComponent,
               canActivate: [AdminGuardFn],
+            },
+            {
+                path: "add-article",
+                component: AddArticleComponent,
+                canActivate: [AdminGuardFn],
+            },
+            {
+                path: "update-article/:id",
+                component: UpdateArticleComponent,
+                canActivate: [AdminGuardFn],
+            }
+            ,
+            {
+                path: "attribute",
+                component: AttributeComponent,
+                canActivate: [AdminGuardFn],
+            }
+            ,
+            {
+                path: "add-attribute",
+                component: AddAttributeComponent,
+                canActivate: [AdminGuardFn],
+            }
+            ,
+            {
+                path: "update-attribute/:id",
+                component: UpdateAttributeComponent,
+                canActivate: [AdminGuardFn],
             }
         ]
     }

@@ -4,7 +4,7 @@
       <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">eCommerce /</span><span> Add Product</span>
       </h4>
-      <div class="app-ecommerce" data-select2-id="24">
+      <div class="app-ecommerce">
         <!-- Add Product -->
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
 
@@ -15,12 +15,12 @@
           <div class="d-flex align-content-center flex-wrap gap-3">
             <!-- <button class="btn btn-label-secondary">Discard</button>
             <button class="btn btn-label-primary">Save draft</button> -->
-            <button type="submit" (click)="insertProduct()" class="btn btn-primary">Publish product</button>
+            <button type="submit" (click)="updateProduct()" class="btn btn-primary">Update product</button>
           </div>
 
         </div>
 
-        <div class="row" data-select2-id="23">
+        <div class="row" >
 
           <!-- First column-->
           <div class="col-12 col-lg-8" >
@@ -31,17 +31,17 @@
               </div>
               <div class="card-body">
                 <div class="mb-3">
-                  <label class="form-label">Name</label>
-                  <input type="text" class="form-control"
+                  <label class="form-label" for="ecommerce-product-name">Name</label>
+                  <input type="text" class="form-control" 
                     [(ngModel)]="productDTo.product_name" placeholder="Product title" name="productTitle"
                     aria-label="Product title">
                 </div>
                 <div class="row mb-3">
-                  <div class="col"><label class="form-label" >SKU</label>
+                  <div class="col"><label class="form-label" for="ecommerce-product-sku">SKU</label>
                     <input type="text" [(ngModel)]="productDTo.product_code" class="form-control"
                       placeholder="SKU" name="productSku" aria-label="Product SKU">
                   </div>
-                  <div class="col"><label class="form-label">Barcode</label>
+                  <div class="col"><label class="form-label" for="ecommerce-product-barcode">Barcode</label>
                     <input type="text" [(ngModel)]="productDTo.bar_code" class="form-control"
                        placeholder="0123-4567" name="productBarcode"
                       aria-label="Product barcode">
@@ -49,15 +49,14 @@
                 </div>
                 <!-- Description -->
                 <div>
-                <label class="form-label">Description <span class="text-muted">(short)</span></label>
-                <textarea [(ngModel)]="productDTo.description_long" class="form-control"
-                 rows="3"></textarea>
-              </div>
-
+                  <label class="form-label">Description <span class="text-muted">(short)</span></label>
+                  <textarea [(ngModel)]="productDTo.description_long" class="form-control"
+                    id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
                 <div>
                   <label class="form-label">Description <span class="text-muted">(long)</span></label>
                   <textarea [(ngModel)]="productDTo.description_long" class="form-control"
-                   rows="3"></textarea>
+                    id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
               </div>
             </div>
@@ -85,28 +84,28 @@
                 <h5 class="card-title mb-0">Variants</h5>
               </div>
               <div class="card-body">
-                <form >
-                  <div data-repeater-list="group-a" >
+                <form class="form-repeater" >
+                  <div data-repeater-list="group-a">
                     <div >
-                      <div class="row">
+                      <div class="row" >
 
-                        <div class="mb-3 col-4" data-select2-id="15">
-                          <label class="form-label" for="form-repeater-1-1">Options</label>
-                          <div class="position-relative" data-select2-id="14"><select 
-                              class="select2 form-select select2-hidden-accessible" data-placeholder="Size"
+                        <div class="mb-3 col-4" >
+                          <label class="form-label" >Options</label>
+                          <div class="position-relative" ><select
+                              class="select2 form-select select2-hidden-accessible" 
                               tabindex="-1" aria-hidden="true">
-                              <option value="" data-select2-id="2">Size</option>
-                              <option value="size" data-select2-id="25">Size</option>
-                              <option value="color" data-select2-id="26">Color</option>
-                              <option value="weight" data-select2-id="27">Weight</option>
-                              <option value="smell" data-select2-id="28">Smell</option>
+                              <option value=""> Size</option>
+                              <option value="size" >Size</option>
+                              <option value="color" >Color</option>
+                              <option value="weight" >Weight</option>
+                              <option value="smell" >Smell</option>
                             </select>
                           </div>
                         </div>
 
                         <div class="mb-3 col-8">
-                          <label class="form-label invisible" for="form-repeater-1-2">Not visible</label>
-                          <input type="number" id="form-repeater-1-2" class="form-control" placeholder="Enter size">
+                          <label class="form-label invisible">Not visible</label>
+                          <input type="number" class="form-control" placeholder="Enter size">
                         </div>
 
                       </div>
@@ -125,7 +124,7 @@
           <!-- /Second column -->
 
           <!-- Second column -->
-          <div class="col-12 col-lg-4" data-select2-id="40">
+          <div class="col-12 col-lg-4" >
             <!-- Pricing Card -->
             <div class="card mb-4">
               <div class="card-header">
@@ -153,7 +152,7 @@
                 <div class="mb-3">
                   <label class="form-label" for="ecommerce-product-discount-price">quantity</label>
                   <input type="number" [(ngModel)]="productDTo.quantity" class="form-control"
-                    id="ecommerce-product-discount-price" placeholder="Discounted Price" name="productDiscountedPrice"
+                   placeholder="Discounted Price"
                     aria-label="Product discounted price">
                 </div>
                 <!-- Base Price -->
@@ -166,7 +165,7 @@
                 <div class="mb-3">
                   <label class="form-label" for="ecommerce-product-discount-price">Discounted Price</label>
                   <input type="number" [(ngModel)]="productDTo.promotional_price" class="form-control"
-                    id="ecommerce-product-discount-price" placeholder="Discounted Price" name="productDiscountedPrice"
+                   placeholder="Discounted Price"
                     aria-label="Product discounted price">
                 </div>
                 
@@ -195,7 +194,7 @@
             </div>
             <!-- /Pricing Card -->
             <!-- Organize Card -->
-            <div class="card mb-4" data-select2-id="66">
+            <div class="card mb-4" >
               <div class="card-header">
                 <h5 class="card-title mb-0">Organize</h5>
               </div>
@@ -223,7 +222,7 @@
                           </div>
                         </ng-template>
                         
-                        <button (click)="logCheckedCategoryIds()">Log Checked Categories</button> -->
+                         -->
             
             
                 <!-- <button (click)="logSelectedIds()">Get Selected IDs</button> -->
@@ -250,6 +249,7 @@
                     </div>
                   </div>
                 </ng-template>
+                <button (click)="logCheckedCategoryIds()">Log Checked Categories</button>
               </div>
             </div>
 
@@ -259,8 +259,5 @@
         </div>
       </div>
     </div>
-
-
-<!-- VEJqciNYnKeOAIIjBYalMKQjrnQqguRW -->
-  </app-section>
+</app-section>
 </app-blank>

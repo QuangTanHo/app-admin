@@ -1,5 +1,5 @@
 <!-- pagination.component.html -->
-<div *ngIf="data.length">
+<div *ngIf="data?.length">
 
   <div class="pagination-controls">
     <button (click)="goToFirstPage()" [disabled]="currentPage === 1">

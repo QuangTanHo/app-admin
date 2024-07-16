@@ -34,16 +34,11 @@ private token = localStorage.getItem('access_token') ?? '';;
       })
     })
   }
-  // getDetailCategory(category: any): Observable<Category> {
-  //   return this.http.post<Category>(`${this.apiBaseUrl}un_auth/category/category_detail`,category);
-  // }
-  // deleteCategory(category_id: string): Observable<string> {
-  //   return this.http.delete<string>(`${this.apiBaseUrl}admin/category/delete/${category_id}`);
-  // }
-  // // updateCategory(id: number, updatedCategory: UpdateCategoryDTO): Observable<UpdateCategoryDTO> {
-  // //   return this.http.put<Category>(`${this.apiBaseUrl}/Product/${id}`, updatedCategory);
-  // // }
-  inseProduct(product: Product): Observable<any> {
+  getProductById(productId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}un_auth/product/${productId}`);
+  }
+ 
+  insertProduct(product: Product): Observable<any> {
     // Add a new category
     return this.http.post(`${this.apiBaseUrl}admin/product/create`, product,{
       headers: new HttpHeaders({
@@ -51,5 +46,14 @@ private token = localStorage.getItem('access_token') ?? '';;
           Authorization: `Bearer ${this.token}`
       })
     })
+  }
+
+   updateProduct(model :any): Observable<any> {
+    return this.http.post<any>(`${this.apiBaseUrl}admin/product/product_update`, model,{
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.token}`
+      })
+    } );
   }
 }
