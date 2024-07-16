@@ -31,8 +31,8 @@ export class LoginComponent {
   ){}
 
   signIn() {
-    this.model.email = 'quangtan1197@gmail.com'
-    this.model.password = '123456'
+    // this.model.email = 'quangtan1197@gmail.com'
+    // this.model.password = '123456'
     this.spinner.show();
     this.userService.login(this.model).subscribe({
       next: (response: ResultModel<LoginResponseModel>) => {

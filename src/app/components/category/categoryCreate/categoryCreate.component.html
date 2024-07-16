@@ -5,7 +5,7 @@
         <div class="col-md-6">
           <div class="card mb-4">
               <div class="card-header">
-                Set product Image
+                Thêm Ảnh
               </div>
               <div class="drag-drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
                 (drop)="onDrop($event)" (click)="onAreaClick()">
@@ -22,14 +22,23 @@
             </div>
         </div>
         <div class="col-md-6">
-          <h3>Insert Category</h3>
+          <h3>Thêm Loại Sản Phẩm</h3>
             <div class="form-group">
-              <label for="name">Name:</label>
+              <label for="name">Tên:</label>
               <input type="text" id="name"  [(ngModel)]="category.category_name"  name="name" class="form-control" required>
-              <label for="name">Category Parent:</label>
+              <label for="name"></label>
               <select class="form-select" aria-label="Default select example"  (ngModelChange)="changeCategory($event)" [(ngModel)]="category.category_parent_id">
-                <option selected>Select Category</option>
+                <option selected>chọn tên </option>
                 <option *ngFor="let c of categories" [ngValue]="c.category_id">{{ c.category_name }}</option>
+              </select>
+
+              <label for="name">Phân Loại Sản Phẩm</label>
+              <select class="form-select" aria-label="Default select example"  (ngModelChange)="changeCategory($event)" [(ngModel)]="category.category_type">
+                <option value="PRODUCT_CATEGORY">Danh Mục Sản Phẩm </option>
+                <option value="PRODUCT_CATEGORY_SEARCH">Danh Mục Tìm Kiếm Sản Phẩm </option>
+                <option value="PRODUCT_CATEGORY_HOME">Danh Mục Trang Chủ</option>
+                <option value="PRODUCT_CATEGORY_HOT">Danh Mục Nóng</option>
+                <option value="PRODUCT_CATEGORY_FAMILY">Danh mục Gia Đình</option>
               </select>
             </div>
             

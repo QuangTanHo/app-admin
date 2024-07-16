@@ -95,6 +95,9 @@ export class CategoryCreateComponent implements OnInit {
   changeCategory(e:Event){
     this.category.category_parent_id = e.toString();
   }
+  changeCategoryType(e:Event){
+    this.category.category_parent_id = e.toString();
+  }
 
   async insertImage(): Promise<string | null> {
     this.uploadFile.type = 'CATEGORY_IMAGE';
@@ -119,7 +122,7 @@ export class CategoryCreateComponent implements OnInit {
         this.category.file_id = fileId;
       }
     }
-    this.category.category_type ='PRODUCT_CATEGORY';
+    // this.category.category_type ='PRODUCT_CATEGORY';
     this.categoryService.insertCategory(this.category).subscribe({
       next: (response) => {
         this.spinner.hide();

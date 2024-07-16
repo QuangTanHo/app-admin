@@ -118,8 +118,12 @@ export class CategoryUpdateComponent implements OnInit {
   changeCategory(e:Event){
     this.category.category_parent_id = e.toString();
   }
+  changeCategoryType(e:Event){
+    this.category.category_parent_id = e.toString();
+  }
 
   getCategories() {
+
     this.typeModel = {
       type: ['PRODUCT_CATEGORY']
     };
@@ -144,7 +148,7 @@ export class CategoryUpdateComponent implements OnInit {
       next: (response : any) => { 
         if(response){
         this.category = response.result_data;
-        this.category.category_parent_id = response.result_data.category_parent_id[0].category_id;
+         this.category.category_parent_id = response.result_data.category_parent_id ? response.result_data.category_parent_id :'';
         if(this.category.file_id){
           this.getImagebById();
         }
@@ -161,6 +165,7 @@ export class CategoryUpdateComponent implements OnInit {
   }
 
 getImagebById(){
+
   this.uploadService.getInforFileById(this.category.file_id).subscribe({
     next: (res) => {
       if(res){
@@ -211,7 +216,7 @@ async  updateCategory() {
       this.category.file_id = fileId;
     }
   }
-  this.category.category_type ='PRODUCT_CATEGORY';
+  // this.category.category_type ='PRODUCT_CATEGORY';
   this.categoryService.updateCategory(this.category).subscribe({
     next: (response) => {
       this.spinner.hide();

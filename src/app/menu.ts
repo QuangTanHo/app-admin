@@ -82,20 +82,13 @@ export const Menus: MenuModel[] = [
             },
             {
                 name: "Add Article",
-                icon: "fab fa-product-hunt",
+                icon: "as fa-plus",
                 url: "/add-article",
                 isTitle: false,
                 subMenus: [],
                 roles: ['1']
             },
-            {
-                name: "Update Article",
-                icon: "fas fa-plus",
-                url: "/update-product",
-                isTitle: false,
-                subMenus: [],
-                roles: ['1']
-            },
+            
         ],
         roles: ['1']
     },

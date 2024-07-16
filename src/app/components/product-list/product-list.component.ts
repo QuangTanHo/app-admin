@@ -32,7 +32,6 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService : ProductService,
     private uploadService : UploadService,
-    private toatService : ToastService,
     private router: Router,
   ) { }
 
@@ -117,5 +116,9 @@ export class ProductListComponent implements OnInit {
 
   updateProduct(product: ProductRespone) {
     this.router.navigate(['/update-product', product.product_id]);
+  }
+
+  insertProduct() {
+    this.router.navigate(['/add-product']);
   }
 }

@@ -76,12 +76,12 @@ export class AddArticleComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'http://your-server-url/upload-image', // Replace with your API endpoint for image upload
+    // uploadUrl: 'http://your-server-url/upload-image', // Replace with your API endpoint for image upload
     uploadWithCredentials: false,
     sanitize: true,
     toolbarPosition: 'top',
     toolbarHiddenButtons: [
-      ['insertImage'],
+      // ['insertImage'],
       ['insertVideo'],
       ['bold', 'italic'],
       ['fontSize']
@@ -167,6 +167,8 @@ export class AddArticleComponent implements OnInit {
   }
 
   async insertArticle() {    
+    debugger
+    this.htmlContent
       this.spinner.show();
       if (this.image.src) {
         const fileId = await this.insertImage(this.uploadFile);
