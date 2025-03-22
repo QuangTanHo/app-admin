@@ -1,7 +1,10 @@
 <!-- pagination.component.html -->
 <div *ngIf="data?.length">
-
-  <div class="pagination-controls">
+ <div class="pagination-controls">
+  <div class="title-page">
+    page {{currentPage}} of {{totalRecords}}
+  </div>
+  <div class="pagination-size">
     <button (click)="goToFirstPage()" [disabled]="currentPage === 1">
       <mat-icon>skip_previous</mat-icon>
     </button>
@@ -21,4 +24,10 @@
       <mat-icon>skip_next</mat-icon>
     </button>
   </div>
+  <div class="page-size-controls">
+    <select class ="form-select-custom" [(ngModel)]="pageSize" (change)="onPageSizeChange($event)">
+      <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+    </select>
+  </div>
+ </div>
 </div>

@@ -1,12 +1,10 @@
 <body class="hold-transition login-page">
     <div class="login-box">
-        <div class="card card-outline card-dark">
+        <div class="card outline-card">
             <div class="card-header text-center">
-                <a class="h1"><b>HA </b>TISA</a>
+              <img src="../../../assets/images/logo-jkiocean.png" width="300px" height="80px">
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Wellcome  To Shop </p>
-
                 <div class="input-group mb-3">
                     <input [(ngModel)]="model.email" type="email" class="form-control" placeholder="Email">
                     <div class="input-group-append">
@@ -23,9 +21,13 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="social-login">
+                    <h3>Or login with</h3>
+                    <button (click)="loginWithGoogle()">Login with Google</button>
+                  </div>
+           
                 <button (click)="signIn()" class="btn btn-dark btn-block">
-                    <i class="fa-solid fa-lock me-1"></i>
+                    <span class="fas fa-sigin"></span>
                    Login
                 </button>
             </div>

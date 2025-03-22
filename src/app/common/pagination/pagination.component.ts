@@ -1,22 +1,24 @@
-// pagination.component.ts
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule,FormsModule],
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
   @Input() data: any[] = [];
   @Input() totalRecords = 0;
+  pageSizeOptions: number[] = [5, 10, 20, 50]; 
   @Input() pageSize = 10;
+  @Input() currentPage = 1; // Nhận currentPage từ bên ngoài
   @Output() pageChanged = new EventEmitter<number>();
+  @Output() sizeChanged = new EventEmitter<number>();
 
-  currentPage = 1;
   totalPages = 0;
   pageNumbers: (number | string)[] = [];
 
@@ -30,6 +32,15 @@ export class PaginationComponent implements OnInit {
 
   calculatePages(): void {
     this.totalPages = Math.ceil(this.totalRecords / this.pageSize);
+
+    // Đảm bảo currentPage nằm trong khoảng hợp lệ
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
+    }
+    if (this.currentPage < 1) {
+      this.currentPage = 1;
+    }
+
     this.setPageNumbers();
   }
 
@@ -58,41 +69,7 @@ export class PaginationComponent implements OnInit {
         this.setPageNumbers();
       }
     } else if (page === '...') {
-      // this.showNextPages();
-    }
-  }
-
-  showNextPages(): void {
-    if (this.pageNumbers.includes('...')) {
-      const index = this.pageNumbers.indexOf('...');
-      let startPage = typeof this.pageNumbers[index - 1] === 'number' ? (this.pageNumbers[index - 1] as number) + 1 : 1;
-      this.pageNumbers.splice(index, 1); // Remove '...'
-
-      while (startPage <= this.totalPages && this.pageNumbers.length < 7) {
-        this.pageNumbers.push(startPage++);
-      }
-
-      if (this.pageNumbers.length < 7 && this.pageNumbers[this.pageNumbers.length - 1] !== this.totalPages) {
-        this.pageNumbers.push('...');
-        this.pageNumbers.push(this.totalPages);
-      }
-    }
-  }
-
-  showPreviousPages(): void {
-    if (this.pageNumbers.includes('...')) {
-      const index = this.pageNumbers.indexOf('...');
-      let endPage = typeof this.pageNumbers[index + 1] === 'number' ? (this.pageNumbers[index + 1] as number) - 1 : this.totalPages;
-      this.pageNumbers.splice(index, 1); // Remove '...'
-
-      while (endPage >= 1 && this.pageNumbers.length < 7) {
-        this.pageNumbers.unshift(endPage--);
-      }
-
-      if (this.pageNumbers.length < 7 && this.pageNumbers[0] !== 1) {
-        this.pageNumbers.unshift('...');
-        this.pageNumbers.unshift(1);
-      }
+      // Xử lý khi nhấp vào '...'
     }
   }
 
@@ -114,5 +91,9 @@ export class PaginationComponent implements OnInit {
     if (this.currentPage < this.totalPages) {
       this.onPageChange(this.currentPage + 1);
     }
+  }
+  onPageSizeChange(event: Event): void {
+    this.pageSize = +(event.target as HTMLSelectElement).value;
+    this.sizeChanged.emit(this.pageSize);
   }
 }

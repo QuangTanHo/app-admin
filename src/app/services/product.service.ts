@@ -1,59 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Category } from '../models/category';
-import { TypeModel } from '../models/type.model';
-import { HttpUtilService } from './http.util.service';
-import { Product } from '../models/product';
-import { ProductDTO } from '../models/modelDTO/productDTO';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private apiBaseUrl = environment.apiBaseUrl;
-  private apiConfig = {
-    headers: this.httpUtilService.createHeaders(),
-}
-private token = localStorage.getItem('access_token') ?? '';;
+  private apiGetRoles  = `${environment.apiBaseUrl}un_auth/products/product_list`;
+  private apiGetOrders  = `${environment.apiBaseUrl}orders`;
 
-  constructor(private http: HttpClient,
-    private httpUtilService: HttpUtilService
-  ) { }
-  getProduct(product :ProductDTO): Observable<any> {
-    return this.http.post<any>(`${environment.apiBaseUrl}un_auth/product/get_all_product`, product);
-  }
+  constructor(private http: HttpClient) { }
 
-  deleteProduct(productId: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiBaseUrl}admin/product/delete/${productId}`,{
-      headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.token}`
-      })
-    })
+  getAllProducts():Observable<any> {
+    return this.http.get<any[]>(this.apiGetRoles);
   }
-  getProductById(productId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiBaseUrl}un_auth/product/${productId}`);
-  }
- 
-  insertProduct(product: Product): Observable<any> {
-    // Add a new category
-    return this.http.post(`${this.apiBaseUrl}admin/product/create`, product,{
-      headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.token}`
-      })
-    })
+  createdOrders(data:any):Observable<any> {
+    return  this.http.post(this.apiGetOrders, data);
   }
 
-   updateProduct(model :any): Observable<any> {
-    return this.http.post<any>(`${this.apiBaseUrl}admin/product/product_update`, model,{
-      headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.token}`
-      })
-    } );
-  }
 }

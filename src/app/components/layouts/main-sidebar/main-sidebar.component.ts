@@ -4,11 +4,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MenuPipe } from '../../../common/pipes/menu.pipe';
 import { AuthService } from '../../../services/auth.service';
+import { TranslationPipe } from '../../../common/pipes/translation.pipe';
 
 @Component({
   selector: 'app-main-sidebar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, FormsModule, MenuPipe],
+  imports: [RouterLink, RouterLinkActive, FormsModule, MenuPipe, TranslationPipe],
   templateUrl: './main-sidebar.component.html',
   styleUrl: './main-sidebar.component.css'
 })

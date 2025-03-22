@@ -11,14 +11,17 @@ export class AuthService {
   private readonly TOKEN_KEY = 'access_token';
   token: string = "";
 
-  user?: UserModel | null;
+  user?:any;
 
 
 
   constructor(
     private router: Router,
     private userService: UserService
-  ) { }
+   
+  ) { 
+   
+  }
 
   isAuthenticated(){
     this.token = localStorage.getItem(this.TOKEN_KEY) ?? "";
@@ -45,6 +48,8 @@ export class AuthService {
 
   hasRole(roleId: string): boolean {
     this.user = this.userService.getUserResponseFromLocalStorage();
-    return this.user?.roleId === roleId;
+    return this.user.role.id.toString() === roleId;
   }
+
+ 
 }

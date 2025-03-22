@@ -1,0 +1,217 @@
+form {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  .table-order{
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+    border: 1px solid #b0b0b1;
+    background-color: #fff;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #009cc3;
+  }
+  }
+  /* Make sure the table doesn't collapse and keep its structure */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* This ensures columns are of equal width */
+  }
+  
+  thead th {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  /* Wrap the body of the table in a scrollable container */
+  tbody {
+    display: block; /* This allows the scroll to affect the tbody only */
+    max-height: 700px; /* Adjust this value as needed */
+    overflow-y: auto;
+    width: 100%; /* Set the same width for proper alignment */
+  }
+  
+  tbody td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  thead, tbody tr {
+    display: table;
+    width: 100%; /* Match the width of the table */
+    table-layout: fixed; /* Ensure fixed layout for both thead and tbody */
+  }
+  
+}
+
+/* Fix input and button widths inside the table */
+input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px;
+}
+
+.pd-button {
+  padding: 10px;
+}
+
+.gr-button-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+button[type="submit"] {
+  width: 150px;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #444;
+}
+
+button.mat-raised-button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.mat-raised-button:hover {
+  background-color: #444;
+}
+
+.table-container {
+            width: 100%;
+            overflow-x: auto;
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              background-color: #fff;
+              border-radius: 8px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+          th, td {
+              padding: 12px 15px;
+              text-align: left;
+              white-space: nowrap;
+          }
+          th {
+              background-color: #f1f1f1;
+              font-weight: bold;
+              position: sticky;
+              top: 0;
+              z-index: 2;
+          }
+          tr:nth-child(even) {
+              background-color: #f9f9f9;
+          }
+          .status {
+              display: inline-block;
+              padding: 5px 10px;
+              border-radius: 12px;
+              font-size: 12px;
+              font-weight: bold;
+          }
+          .status.pending {
+              background-color: #ffeeba;
+              color: #856404;
+          }
+          .status.success {
+              background-color: #d4edda;
+              color: #155724;
+          }
+          .action-icons i {
+              margin-right: 10px;
+              cursor: pointer;
+          }
+          .checkbox {
+              text-align: center;
+          }
+          tbody {
+              display: block;
+              max-height: 300px;
+              overflow-y: auto;
+          }
+          thead, tbody tr {
+              display: table;
+              width: 100%;
+              table-layout: fixed;
+          }
+          @media (max-width: 768px) {
+              table, thead, tbody, th, td, tr {
+                  display: block;
+              }
+              thead tr {
+                  display: none;
+              }
+              tr {
+                  margin-bottom: 10px;
+                  border: 1px solid #ddd;
+                  border-radius: 8px;
+                  padding: 10px;
+                  background-color: #fff;
+              }
+              td {
+                  display: flex;
+                  justify-content: space-between;
+                  padding: 10px;
+                  border: none;
+                  border-bottom: 1px solid #ddd;
+              }
+              td:last-child {
+                  border-bottom: none;
+              }
+              td:before {
+                  content: attr(data-label);
+                  flex-basis: 50%;
+                  font-weight: bold;
+                  text-align: left;
+              }
+              tbody {
+                  max-height: none;
+                  overflow-y: visible;
+              }
+          }
+        }
+.w-5{
+  width: 5%;
+}
+.w-10{
+  width: 10%;
+}
+.w-25{
+  width: 25%;
+}
+.w-50{
+  width: 50%;
+}

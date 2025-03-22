@@ -3,20 +3,24 @@ import { BrowserAnimationsModule, provideAnimations } from "@angular/platform-br
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr } from 'ngx-toastr';
 import {MatIconModule} from '@angular/material/icon';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([TokenInterceptor])),
     importProvidersFrom(
       BrowserAnimationsModule,
       NgxSpinnerModule,
-      MatIconModule
+      MatIconModule,
+      MatAutocompleteModule,
+      BrowserAnimationsModule 
 
     ), provideAnimationsAsync(),
     provideAnimations(), // required animations providers
@@ -27,6 +31,5 @@ export const appConfig: ApplicationConfig = {
         preventDuplicates: true,
       }
     ),
-
   ]
 };

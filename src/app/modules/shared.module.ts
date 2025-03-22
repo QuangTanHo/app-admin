@@ -6,6 +6,11 @@ import { TrCurrencyPipe } from 'tr-currency';
 import { PaginationComponent } from '../common/pagination/pagination.component';
 import { BlankComponent } from '../components/blank/blank.component';
 import { SectionComponent } from '../components/section/section.component';
+import { TranslationPipe } from '../common/pipes/translation.pipe';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TokenInterceptor } from '../interceptors/token.interceptor';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -16,10 +21,14 @@ import { SectionComponent } from '../components/section/section.component';
     BlankComponent,
     SectionComponent,
     FormsModule,
+    HttpClientModule,
     TrCurrencyPipe,
     MatDialogModule,
     ReactiveFormsModule,
-    PaginationComponent
+    PaginationComponent,
+    TranslationPipe,
+    MatAutocompleteModule,
+    OAuthModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -27,7 +36,12 @@ import { SectionComponent } from '../components/section/section.component';
     SectionComponent,
     FormsModule,
     TrCurrencyPipe,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule, 
+    TranslationPipe
+  ],
+  providers: [
+    // provideHttpClient(withInterceptorsFromDi()),
+    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
 })
 export class SharedModule { }

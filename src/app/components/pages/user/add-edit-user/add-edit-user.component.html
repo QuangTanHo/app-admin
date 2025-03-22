@@ -1,0 +1,90 @@
+<app-blank pageName="User"
+           [routes]="['add-edit-user']">
+  <app-section sectionTitle="{{!userId ? 'Create User': 'Edit User'}}">
+    <div class="container">
+       <h2>Customer Information </h2>
+       <form [formGroup]="userForm">
+           <div class="form-row mb-3">
+               <div class="col">
+                   <label for="email" class="form-label">Email</label>
+                   <input type="email" class="form-control" id="email"  formControlName="email" required>
+               </div>
+               <div class="col">
+                   <label for="user_name" class="form-label">User Name</label>
+                   <input type="text" class="form-control" id="user_name"  formControlName="user_name" required>
+               </div>
+               <div class="col">
+                     <label for="phone_number" class="form-label">Phone Number</label>
+                     <input type="text" class="form-control" id="phone_number"  formControlName="phone_number" required>
+                 </div>
+           </div>
+           <div class="form-row mb-3">
+               <div class="col">
+                   <label for="first_name" class="form-label">First Name</label>
+                   <input type="text" class="form-control" id="first_name"  formControlName="first_name" required>
+               </div>
+               <div class="col">
+                   <label for="last_name" class="form-label">Last Name</label>
+                   <input type="text" class="form-control" id="last_name"  formControlName="last_name" required>
+               </div>
+               <div class="col">
+                     <label for="date_of_birth" class="form-label">Date of Birth</label>
+                     <input type="date" class="form-control" id="date_of_birth"  formControlName="date_of_birth" required>
+                 </div>
+           </div>
+           <div class="form-row mb-3">
+              <div class="col">
+                  <label for="shop_name" class="form-label">Shop Name</label>
+                  <input type="text" class="form-control" id="shop_name"  formControlName="shop_name" required>
+              </div>
+          </div>
+           <div class="form-row mb-3">
+               <div class="col">
+                   <label for="city" class="form-label">City</label>
+                   <input type="text" class="form-control" id="city" placeholder="City"  formControlName="city">
+               </div>
+               <div class="col">
+                   <label for="state" class="form-label">State</label>
+                   <input type="text" class="form-control" id="state" placeholder="State"  formControlName="state">
+               </div>
+               <div class="col">
+                   <label for="zip_code" class="form-label">Zip Code</label>
+                   <input type="text" class="form-control" id="zip_code" placeholder="Zip Code" formControlName="zip_code">
+               </div>
+               <div class="col">
+                     <label for="country" class="form-label">Country</label>
+                     <input type="text" class="form-control" id="country" placeholder="Country" formControlName="country">
+                </div>
+           </div>
+           <div class="form-row mb-3">
+               
+               
+               <div class="col">
+                   <label for="address" class="form-label">Address</label>
+                   <input type="text" class="form-control" id="address"  formControlName="address" required>
+               </div>
+           </div>
+           
+           <div class="form-row mb-3">
+               <div class="col">
+                   <label for="role_id" class="form-label">Role</label>
+                   <select class="form-select" formControlName="role_id">
+                     <option selected>Choose role</option>
+                     <option value="1">SUPPER ADMIN</option>
+                     <option value="2">ADMIN</option>
+                     <option value="3">CUSTOMER</option>
+                   </select>
+               </div>
+               <div class="col ml-3" >
+                   <label class="form-label" for="active">Active</label>
+                   <div>
+                          <input type="checkbox" class="form-check-input"  formControlName="active" id="exampleCheck1">
+                   </div>
+               </div>
+           </div>
+           
+           <button type="submit" class="btn btn-primary mt-3" (click)="updateUser()">SAVE</button>
+       </form>
+   </div>  
+</app-section>
+</app-blank>

@@ -12,9 +12,16 @@ export class TokenService {
     getToken(): string {
         return localStorage.getItem(this.TOKEN_KEY) ?? '';
     }
+    getRefreshToken(): string | null {
+        return localStorage.getItem('refresh_token')?? '';
+      }    
     setToken(token: string): void {
         localStorage.setItem(this.TOKEN_KEY, token);
     }
+    setRefreshTokens(refreshToken: string): void {
+        localStorage.setItem('refresh_token', refreshToken);
+      }
+
     getUserId(): number {
         let token = this.getToken();
         if (!token) {
@@ -22,7 +29,7 @@ export class TokenService {
         }
         let userObject = this.jwtHelperService.decodeToken(token);
         // return 'userId' in userObject ? parseInt(userObject['userId']) : 0;
-        return 'userId' in userObject ? parseInt(userObject['userId']) : 0;
+        return 'userId' in userObject ? userObject['userId'] : 0;
     }
 
 

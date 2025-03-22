@@ -26,8 +26,8 @@ export class HttpService {
       }
     }).subscribe({
       next: (res)=> {
-        if(res.result_data){
-          callBack(res.result_data);
+        if(res.data){
+          callBack(res.data);
           this.spinner.hide();
         }        
       },

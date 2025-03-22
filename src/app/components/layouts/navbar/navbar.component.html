@@ -19,5 +19,12 @@
           <i class="fas fa-solid fa-power-off text-danger"></i>
         </a>
       </li>
+      <div>
+        <!-- <label for="lang">Chọn ngôn ngữ:</label> -->
+        <select id="lang" (change)="switchLanguage($event)">
+          <option value="en">English</option>
+          <option value="vi">Tiếng Việt</option>
+        </select>
+      </div>
     </ul>
   </nav>

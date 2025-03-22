@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TranslationPipe } from './common/pipes/translation.pipe';
 
 @Component({
   selector: 'app-root',

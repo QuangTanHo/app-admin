@@ -1,0 +1,235 @@
+<app-blank pageName="Order" [routes]="['order-products']">
+  <app-section sectionTitle="Order Products">
+    
+    <form [formGroup]="productForm">
+      <div class="form-row mb-3">
+        <div class="col-2">
+          <label class="form-label">Customer Name</label>
+          <input type="text" class="form-control" [matAutocomplete]="auto"  formControlName="customer_name">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnCus" (optionSelected)="onOptionSelectedCus($event)"
+                 >
+                  @for (option of filteredCustomers | async; track option) {
+                  <mat-option [value]="option">{{option.full_name}}</mat-option>
+                  }
+                </mat-autocomplete>
+        </div>
+        <div class="col-3">
+          <label class="form-label">Email</label>
+          <input type="text" class="form-control" value="{{cusInfo.email}}"  disabled >
+        </div>
+        <div class="col-2">
+          <label class="form-label">Phone</label>
+          <input type="text" class="form-control" value="{{cusInfo.phone_number}}" disabled>
+        </div>
+        <div class="col-5">
+          <label class="form-label">Shop Name</label>
+          <input type="text" class="form-control"  value="{{cusInfo.shop_name}}"  disabled>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th class="w-5">#</th>
+            <th class="w-50">Product</th>
+            <th class="w-10">Quantity</th>
+            <th class="w-25">Price</th>
+            <th class="w-10">Actions</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="products" class="table-order">
+          <tr *ngFor="let product of products.controls; let i = index" [formGroupName]="i">
+            <td class="w-5">{{i+1}}</td>
+            <td class="w-50">
+              <input matInput placeholder="Product" formControlName="product_name" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                (optionSelected)="onOptionSelected($event, product)">
+                @for (option of filteredOptions[i] | async; track option) {
+                <mat-option [value]="option">{{option.product_name}}</mat-option>
+                }
+              </mat-autocomplete>
+            </td>
+            <td class="w-10">
+              <input matInput placeholder="Quantity" (change)="changeQty($event, product)" type="number" 
+                formControlName="quantity">
+            </td>
+            <td class="w-25">
+              <input matInput placeholder="Price" type="number" formControlName="price">
+            </td>
+            <td class="w-10">
+              <mat-icon (click)="removeProduct(i)">delete</mat-icon>
+              <!-- <button mat-icon-button color="warn" (click)="removeProduct(i)">
+                delete
+              </button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pd-button">
+        <button mat-raised-button color="primary" (click)="addProduct()">Add Product</button>
+        <span>Total Price :{{this.totalPrice}}</span>
+      </div>
+      <div class="gr-button-submit">
+        <button mat-raised-button color="accent"   (click)="onSubmit()" type="submit">Submit</button>
+      </div>
+    </form>
+
+    <div class="table-container">
+      <table>
+          <thead>
+              <tr>
+                  <th class="checkbox"><mat-checkbox></mat-checkbox></th>
+                  <th>Order</th>
+                  <th>Date</th>
+                  <th>Customer</th>
+                  <th>Invoice Status</th>
+                  <th>Total</th>
+                  <th>Quantity</th>
+                  <th>Create By</th>
+                  <th>Update Date</th>
+                  <th>Update By</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let data of this.dataOrders">
+                  <td class="checkbox"><mat-checkbox></mat-checkbox></td>
+                  <td >{{data.order_id}}</td>
+                  <td >{{data.create_date}}</td>
+                  <td >{{data.customer_name}}</td>
+                  <td ><span class="status pending">Pending</span></td>
+                  <td >{{data.total_price}}</td>
+                  <td >{{data.quantity}}</td>
+                  <td>{{data.user_create_by}}</td>
+                  <td>{{data.update_date}}</td>
+                  <td>{{data.user_update_by}}</td>
+                  <td data-label="Action" class="action-icons">
+                      <i class="fas fa-edit"(click)="onEditOrder(data)"></i>
+                      <i class="fas fa-trash-alt" (click)="onDeleteOrder(data.order_id)"></i>
+                  </td>
+              </tr>
+              <!-- <tr>
+                  <td class="checkbox" data-label="Select"><input type="checkbox"></td>
+                  <td data-label="Order">#1004</td>
+                  <td data-label="Date">13 Feb, 2024</td>
+                  <td data-label="Customer">Esther Howard</td>
+                  <td data-label="Payment"><span class="status success">Success</span></td>
+                  <td data-label="Total">$22.00</td>
+                  <td data-label="Delivery">N/A</td>
+                  <td data-label="Items">3 items</td>
+                  <td data-label="Fulfillment"><span class="status fulfilled">Fulfilled</span></td>
+                  <td data-label="Action" class="action-icons">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-alt"></i>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="checkbox" data-label="Select"><input type="checkbox"></td>
+                  <td data-label="Order">#1007</td>
+                  <td data-label="Date">15 Feb, 2024</td>
+                  <td data-label="Customer">Jenny Wilson</td>
+                  <td data-label="Payment"><span class="status pending">Pending</span></td>
+                  <td data-label="Total">$25.00</td>
+                  <td data-label="Delivery">N/A</td>
+                  <td data-label="Items">1 items</td>
+                  <td data-label="Fulfillment"><span class="status unfulfilled">Unfulfilled</span></td>
+                  <td data-label="Action" class="action-icons">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-alt"></i>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="checkbox" data-label="Select"><input type="checkbox"></td>
+                  <td data-label="Order">#1009</td>
+                  <td data-label="Date">17 Feb, 2024</td>
+                  <td data-label="Customer">Guy Hawkins</td>
+                  <td data-label="Payment"><span class="status success">Success</span></td>
+                  <td data-label="Total">$27.00</td>
+                  <td data-label="Delivery">N/A</td>
+                  <td data-label="Items">5 items</td>
+                  <td data-label="Fulfillment"><span class="status fulfilled">Fulfilled</span></td>
+                  <td data-label="Action" class="action-icons">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-alt"></i>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="checkbox" data-label="Select"><input type="checkbox"></td>
+                  <td data-label="Order">#1011</td>
+                  <td data-label="Date">19 Feb, 2024</td>
+                  <td data-label="Customer">Jacob Jones</td>
+                  <td data-label="Payment"><span class="status pending">Pending</span></td>
+                  <td data-label="Total">$32.00</td>
+                  <td data-label="Delivery">N/A</td>
+                  <td data-label="Items">4 items</td>
+                  <td data-label="Fulfillment"><span class="status unfulfilled">Unfulfilled</span></td>
+                  <td data-label="Action" class="action-icons">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-alt"></i>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="checkbox" data-label="Select"><input type="checkbox"></td>
+                  <td data-label="Order">#1013</td>
+                  <td data-label="Date">21 Feb, 2024</td>
+                  <td data-label="Customer">Kristin Watson</td>
+                  <td data-label="Payment"><span class="status success">Success</span></td>
+                  <td data-label="Total">$25.00</td>
+                  <td data-label="Delivery">N/A</td>
+                  <td data-label="Items">3 items</td>
+                  <td data-label="Fulfillment"><span class="status fulfilled">Fulfilled</span></td>
+                  <td data-label="Action" class="action-icons">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-alt"></i>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="checkbox" data-label="Select"><input type="checkbox"></td>
+                  <td data-label="Order">#1015</td>
+                  <td data-label="Date">23 Feb, 2024</td>
+                  <td data-label="Customer">Albert Flores</td>
+                  <td data-label="Payment"><span class="status pending">Pending</span></td>
+                  <td data-label="Total">$28.00</td>
+                  <td data-label="Delivery">N/A</td>
+                  <td data-label="Items">2 items</td>
+                  <td data-label="Fulfillment"><span class="status unfulfilled">Unfulfilled</span></td>
+                  <td data-label="Action" class="action-icons">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-alt"></i>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="checkbox" data-label="Select"><input type="checkbox"></td>
+                  <td data-label="Order">#1018</td>
+                  <td data-label="Date">25 Feb, 2024</td>
+                  <td data-label="Customer">Eleanor Pena</td>
+                  <td data-label="Payment"><span class="status success">Success</span></td>
+                  <td data-label="Total">$35.00</td>
+                  <td data-label="Delivery">N/A</td>
+                  <td data-label="Items">1 items</td>
+                  <td data-label="Fulfillment"><span class="status fulfilled">Fulfilled</span></td>
+                  <td data-label="Action" class="action-icons">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-alt"></i>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="checkbox" data-label="Select"><input type="checkbox"></td>
+                  <td data-label="Order">#1019</td>
+                  <td data-label="Date">27 Feb, 2024</td>
+                  <td data-label="Customer">Theresa Webb</td>
+                  <td data-label="Payment"><span class="status pending">Pending</span></td>
+                  <td data-label="Total">$20.00</td>
+                  <td data-label="Delivery">N/A</td>
+                  <td data-label="Items">2 items</td>
+                  <td data-label="Fulfillment"><span class="status unfulfilled">Unfulfilled</span></td>
+                  <td data-label="Action" class="action-icons">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-alt"></i>
+                  </td>
+              </tr> -->
+          </tbody>
+      </table>
+  </div>
+
+  </app-section>
+</app-blank>

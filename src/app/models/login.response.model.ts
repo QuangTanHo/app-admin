@@ -1,6 +1,6 @@
 export class LoginResponseModel{
     token: string = "";
-    refreshToken: string = "";
+    refresh_token: string = "";
     refreshTokenExpires: string = "";
     userId :String ='';
 }

@@ -10,7 +10,7 @@ import { UserModel } from '../models/user.model';
   providedIn: 'root'
 })
 export class AdminGuard {
-  userResponse?: UserModel | null;
+  userResponse:any;
   constructor(
     private tokenService: TokenService,
     private router: Router,
@@ -19,11 +19,10 @@ export class AdminGuard {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const isTokenExpired = this.tokenService.isTokenExpired();
-    const isUserIdValid = this.tokenService.getUserId() > 0;
+    const isUserIdValid = this.tokenService.getUserId() ? true : false;
     this.userResponse = this.userService.getUserResponseFromLocalStorage();
-    const isAdmin = this.userResponse?.roleId == '1';
-    // if (!isTokenExpired && isUserIdValid && isAdmin) {
-      if (!isTokenExpired  && isAdmin) {
+    const isAdmin = this.userResponse?.role.id == '1' ||  this.userResponse?.role.id  == '2' ;
+    if (!isTokenExpired && isUserIdValid && isAdmin) {
       return true;
     } else {
       this.router.navigate(['/login']);

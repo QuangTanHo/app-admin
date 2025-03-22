@@ -1,6 +1,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
-@import "../../app-admin/src/assets/common/button.scss";
+@import "../../jkiocean-admin-fe/src/assets/common/button.scss";
 @import '@angular/cdk/overlay-prebuilt.css';
+
 a{
     cursor: pointer;
 }
@@ -242,7 +243,18 @@ body { margin: 0; font-family: "Public Sans", -apple-system, BlinkMacSystemFont,
     border: 1px solid #696cff;
     box-shadow: 0 0 .25rem .05rem rgba(105,108,255,.1)
 }
+// reponsive 
+@media (min-width: 1600px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+      max-width: 1600px; /* Điều chỉnh cho màn hình lớn hơn */
+  }
+}
 
+@media (min-width: 1920px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+      max-width: 1920px; /* Full-width cho màn hình 1920px */
+  }
+}
 
  /* pagination */
 

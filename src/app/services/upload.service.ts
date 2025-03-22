@@ -19,25 +19,25 @@ export class UploadService {
     formData.append('file_directory', upload.file_directory);
     formData.append('doc_type_id', upload.doc_type_id);
     formData.append('type', upload.type);
-    return this.http.post<UploadFile[]>(`${environment.apiBaseUrl}un_auth/files/upload_file`, formData);
+    return this.http.post<UploadFile[]>(`${environment.apiBaseUrl}un-auth/files/upload_file`, formData);
   }
 
   getListImage(file: FileImageRequest): Observable<UploadFile[]> {
-    const url = `${environment.apiBaseUrl}un_auth/files/get_info_file_type`;
+    const url = `${environment.apiBaseUrl}un-auth/files/get_info_file_type`;
 
     return this.http.post<UploadFile[]>(url, file);
   }
 
   getOriginalImage(fileId: string): Observable<Blob> {
-    const url = `${environment.apiBaseUrl}un_auth/files/download/original/${fileId}`;
+    const url = `${environment.apiBaseUrl}un-auth/files/download/original/${fileId}`;
     return this.http.get(url, { responseType: 'blob' });
   }
 
   getInforFileById(fileId: string): Observable<any> {
-    return this.http.get<any>(`${environment.apiBaseUrl}un_auth/files/get_info_file_storage/${fileId}`);
+    return this.http.get<any>(`${environment.apiBaseUrl}un-auth/files/get_info_file_storage/${fileId}`);
   }
 
   deleteFileById(fileId: string): Observable<string> {
-    return this.http.delete<string>(`${environment.apiBaseUrl}un_auth/files/delete/${fileId}`);
+    return this.http.delete<string>(`${environment.apiBaseUrl}un-auth/files/delete/${fileId}`);
   }
 }

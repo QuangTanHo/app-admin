@@ -3,53 +3,84 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { LoginModel } from '../models/login.model';
-import { UserModel, UserResponse } from '../models/user.model';
+import { Register, UserModel, UserResponse } from '../models/user.model';
 import { HttpUtilService } from './http.util.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    private apiLogin = `${environment.apiBaseUrl}un_auth/signin`;
-    private apiUser= `${environment.apiBaseUrl}un_auth/user/`;
     private apiBaseUrl = environment.apiBaseUrl;
-    private token = localStorage.getItem('access_token') ?? '';;
+    private apiLogin = `${environment.apiBaseUrl}login`;
+    private apiRegister = `${environment.apiBaseUrl}register`;
+    private apiUser = `${environment.apiBaseUrl}users`;
+    private apiUserAll = `${environment.apiBaseUrl}users/get-all-users`;
+    private apiUserDetail = `${environment.apiBaseUrl}auth/details`;
+    private apiRefreshToken = `${environment.apiBaseUrl}/refreshToken`;
+    private token = localStorage.getItem('access_token') ?? '';
 
-    private apiConfig = {
-        headers: this.httpUtilService.createHeaders(),
+    // private apiConfig = {
+    //     headers: this.httpUtilService.createHeaders(),
+    // }
+    private apiConfigToken = {
+        headers: this.httpUtilService.createHeadersToken(this.token),
     }
 
     constructor(
         private http: HttpClient,
-        private httpUtilService: HttpUtilService
+        private httpUtilService: HttpUtilService,
     ) { }
+
     getListUser(params: any): Observable<UserResponse[]> {
-      return this.http.get<UserResponse[]>(`${this.apiUser}user_list`);
+        return this.http.post<UserResponse[]>(`${this.apiUser}`,params);
+    }
+    getListAllUser(): Observable<UserResponse[]> {
+        return this.http.get<UserResponse[]>(`${this.apiUserAll}`);
     }
 
-  getUserDetail(userId: any): Observable<UserResponse> {
-    return this.http.get<UserResponse>(`${this.apiUser}${userId}`);
-  }
+    UserDetail(userId: any): Observable<UserResponse> {
+        return this.http.get<UserResponse>(`${this.apiUser}/${userId}`);
+    }
 
-  deleteUser(userId: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiBaseUrl}admin/user/delete/${userId}`, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`
-      })
-    })
-  }
+    deleteUser(userId: string): Observable<string> {
+        return this.http.delete<string>(`${this.apiBaseUrl}admin/user/delete/${userId}`,  {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${this.token}`
+            })
+        })
+    }
 
     login(loginModel: LoginModel): Observable<any> {
-        return this.http.post(this.apiLogin, loginModel, this.apiConfig);
+        return this.http.post(this.apiLogin, loginModel);
     }
-    getUserById(userId :string): Observable<UserModel> {
-        return this.http.get<UserModel>(`${this.apiUser}${userId}`);
-      }
-  updateUser(user: UserResponse): Observable<any> {
-    return this.http.post<UserResponse>(`${this.apiUser}user_update`, user);
-  }
- saveUserResponseToLocalStorage(userResponse?: UserModel) {
+
+    register(loginModel: LoginModel): Observable<any> {
+
+            const a =  {
+                "fullname": "John Doe",
+                "email": "johndoe@example.com",
+                "phone_number": "1234567890",
+                "address": "123 Main St, Springfield",
+                "shopName":"1222",
+                "password": "securePassword123",
+                "retype_password": "securePassword123",
+                "date_of_birth": "1990-05-20",
+                "facebook_account_id": 0,
+                "google_account_id": 0,
+                "role_id": 3
+              }
+        return this.http.post(this.apiRegister, a);
+    }
+
+    getUserById(userId: string): Observable<UserModel> {
+        return this.http.get<UserModel>(`${this.apiUser}/${userId}`);
+    }
+
+    updateUser(user: UserResponse): Observable<any> {
+        return this.http.post<UserResponse>(`${this.apiUser}/update`, user);
+    }
+    saveUserResponseToLocalStorage(userResponse?: UserModel) {
         try {
             if (userResponse == null || !userResponse) {
                 return;
@@ -82,6 +113,18 @@ export class UserService {
         } catch (error) {
             console.error('Error removing user data from local storage:', error);
         }
+    }
+
+    getUserDetail(token: string) {
+        return this.http.post(this.apiUserDetail,{}, {
+            headers: new HttpHeaders({
+                'Authorization': `Bearer ${token}`
+              })
+            });
+      }
+
+    refeshToken(refreshToken :any): Observable<any> {
+        return this.http.post<UserResponse>(`${this.apiRefreshToken}`, {refreshToken} );
     }
 
 }
